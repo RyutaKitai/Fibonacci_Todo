@@ -2,12 +2,12 @@ import React from 'react';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 import Button from '../elements/Button';
 
-class MemoListLogin extends React.Component {
+class MemoSignUp extends React.Component {
   render() {
     return (
       <View>
         <View style={styles.container}>
-          <Text style={styles.title}>ログイン画面</Text>
+          <Text style={styles.title}>SignUp画面</Text>
           <View style={styles.box}>
             <TextInput value="ユーザーネーム" />
           </View>
@@ -15,7 +15,7 @@ class MemoListLogin extends React.Component {
             <TextInput value="パスワード" />
           </View>
         </View>
-        <Button>ログインする</Button>
+        <Button>Singupする</Button>
       </View>
     );
   }
@@ -59,4 +59,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MemoListLogin;
+export default MemoSignUp;
