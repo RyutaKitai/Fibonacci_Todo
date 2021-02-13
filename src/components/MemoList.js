@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#a2a2a2',
   },
-  
+
 });
 
 export default MemoList;

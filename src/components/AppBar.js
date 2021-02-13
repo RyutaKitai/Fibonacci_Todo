@@ -6,7 +6,7 @@ class AppBar extends React.Component {
     return (
       <View style={styles.appbar}>
         <View>
-          <Text style={styles.appbarTitle}>Todolist</Text>
+          <Text style={styles.appbarTitle}>Fibonacci-ToDo</Text>
         </View>
       </View>
     );
