@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     marginTop: 160,
   },
   box: {
-    borderWidth: 4,
+    borderWidth: 5,
     borderColor: '#61C8FF',
     alignItems: 'center',
     padding: 15,
