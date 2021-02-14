@@ -1,13 +1,15 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import CheckBox from '../elements/CheckBox';
 
 class MemoList extends React.Component {
   render() {
     return (
       <View style={styles.memoList}>
         <View style={styles.memoListItem}>
-          <Text style={styles.memoListTitle}>アイテム</Text>
-          <Text style={styles.memoListDate}>2020/12/19</Text>
+          <CheckBox>◯</CheckBox>
+          <Text style={styles.memoListTitle}>今日の天気</Text>
+          <Text style={styles.memoListDate}>2020/2/14</Text>
         </View>
         <View style={styles.memoListItem}>
           <Text style={styles.memoListTitle}>アイテム</Text>
@@ -49,7 +51,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#a2a2a2',
   },
-
+  checkbox: {
+    width: 20,
+    height: 20,
+    borderColor: '#61C8FF',
+  },
 });
 
 export default MemoList;

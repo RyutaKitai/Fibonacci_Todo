@@ -4,14 +4,16 @@ import MemoListScreen from './src/screens/MemoListScreen';
 // import MemoListLogin from './src/screens/MemoListLogin';
 // import MemoSignUp from './src/screens/MemoSignUp';
 import AppBar from './src/components/AppBar';
+// import MemoListDetail from './src/screens/MemoListDetail';
 
 export default function App() {
   return (
     <View style={styles.container}>
       <AppBar />
-      <MemoListScreen />
+      {/* <MemoListDetail /> */}
       {/* <MemoListLogin /> */}
       {/* <MemoSignUp /> */}
+      <MemoListScreen />
     </View>
   );
 }
