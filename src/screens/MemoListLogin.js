@@ -15,7 +15,7 @@ class MemoListLogin extends React.Component {
             <TextInput value="パスワード" />
           </View>
         </View>
-        <Button>ログインする</Button>
+        <Button onPress={() => { this.props.navigation.navigate('Memolist'); }}>ログインする</Button>
       </View>
     );
   }
@@ -24,13 +24,14 @@ class MemoListLogin extends React.Component {
 const styles = StyleSheet.create({
   container: {
     padding: 0,
-    margin: 0,
-    marginTop: 160,
+    margin: 30,
+    marginTop: 10,
   },
   box: {
     borderWidth: 5,
     borderColor: '#61C8FF',
     alignItems: 'center',
+    alignSelf: 'center',
     padding: 15,
     width: 270,
     marginBottom: 20,
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
     padding: 20,
     marginBottom: 20,
     textAlign: 'center',
-    fontSize: 30,
+    fontSize: 20,
   },
   button: {
     borderWidth: 4,

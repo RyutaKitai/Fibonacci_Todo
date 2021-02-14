@@ -9,23 +9,18 @@ class MemoList extends React.Component {
         <View style={styles.memoListItem}>
           <CheckBox>◯</CheckBox>
           <Text style={styles.memoListTitle}>今日の天気</Text>
-          <Text style={styles.memoListDate}>2020/2/14</Text>
         </View>
         <View style={styles.memoListItem}>
           <Text style={styles.memoListTitle}>アイテム</Text>
-          <Text style={styles.memoListDate}>2020/12/19</Text>
         </View>
         <View style={styles.memoListItem}>
           <Text style={styles.memoListTitle}>アイテム</Text>
-          <Text style={styles.memoListDate}>2020/12/19</Text>
         </View>
         <View style={styles.memoListItem}>
           <Text style={styles.memoListTitle}>アイテム</Text>
-          <Text style={styles.memoListDate}>2020/12/19</Text>
         </View>
         <View style={styles.memoListItem}>
           <Text style={styles.memoListTitle}>アイテム</Text>
-          <Text style={styles.memoListDate}>2020/12/19</Text>
         </View>
       </View>
     );

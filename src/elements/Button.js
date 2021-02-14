@@ -1,21 +1,24 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet, Text } from 'react-native';
+import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import { strings } from 'prop-types';
 
 export default function Button(props) {
   const { children } = props;
   return (
-    <TouchableOpacity
-      style={styles.button}
-    >
-      <Text style={styles.buttonTxt}>{children}</Text>
-    </TouchableOpacity>
+    <View>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={props.onPress}
+      >
+        <Text style={styles.buttonTxt}>{children}</Text>
+      </TouchableOpacity>
+    </View>
   );
 }
 
 Button.prototypes = {
   children: strings,
-}
+};
 
 // class Button extends React.Component {
 //   render() {
