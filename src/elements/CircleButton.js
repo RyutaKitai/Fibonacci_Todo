@@ -1,14 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
 class CircleButton extends React.Component {
   render() {
     return (
-      <View style={styles.circleAddButton}>
-        <Text style={styles.circleButtonText}>
-          {this.props.children}
-        </Text>
-      </View>
+      <TouchableOpacity style={styles.circleAddButton} onPress={this.props.onPress}>
+        <Text style={styles.circleButtonText}>{this.props.children}</Text>
+      </TouchableOpacity>
     );
   }
 }

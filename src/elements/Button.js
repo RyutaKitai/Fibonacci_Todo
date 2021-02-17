@@ -20,19 +20,6 @@ Button.prototypes = {
   children: strings,
 };
 
-// class Button extends React.Component {
-//   render() {
-//     return (
-//       <TouchableOpacity
-//         style={styles.button}
-//         onPress={this.onPress}
-//       >
-//         <Text style={styles.buttonTxt}>{this.props.children}</Text>
-//       </TouchableOpacity>
-//     );
-//   }
-// }
-
 const styles = StyleSheet.create({
   button: {
     borderWidth: 4,
