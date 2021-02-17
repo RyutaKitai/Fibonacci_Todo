@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
-// import DropDownMenu from '../components/Dropdown';
+import Dropdown from './Dropdown';
 import CheckBox from '../elements/CheckBox';
 // state = {
 //   checkedId: -1,
@@ -36,25 +36,29 @@ class MemoList extends React.Component {
         <View style={styles.memoListItem}>
           <CheckBox style={styles.check} />
           <TextInput style={styles.memoListTitle} />
-          {/* <DropDownMenu /> */}
+          <Dropdown />
         </View>
         <View style={styles.memoListItem}>
           <CheckBox style={styles.check} />
           <TextInput style={styles.memoListTitle} />
+          <Dropdown />
         </View>
         <View style={styles.memoListItem}>
           <CheckBox style={styles.check} />
           <TextInput style={styles.memoListTitle} />
+          <Dropdown />
         </View>
         <View style={styles.memoListItem}>
           <CheckBox style={styles.check} />
           <TextInput style={styles.memoListTitle} />
+          <Dropdown />
         </View>
         <View style={styles.memoListItem}>
           <CheckBox style={styles.check} />
           <TextInput style={styles.memoListTitle} />
+          <Dropdown />
         </View>
-      </View>
+      </View >
     );
   }
 }
@@ -76,9 +80,8 @@ const styles = StyleSheet.create({
   },
   memoListTitle: {
     fontSize: 18,
-    marginBottom: 4,
-    padding: 5,
-    width: '100%',
+    margin: 10,
+    width: '70%',
   },
   memoListDate: {
     fontSize: 12,
@@ -88,6 +91,9 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     borderColor: '#61C8FF',
+  },
+  pulldown: {
+    flex: 1,
   },
 });
 

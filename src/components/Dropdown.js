@@ -1,84 +1,46 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { TouchableOpacity, View, StyleSheet, Text, Modal } from 'react-native';
 
-// export default function DropDownMenu() {
-//   const [isChecked, clickState] = useState(false);
+export default function Dropdown() {
+  const [isChecked, clickState] = useState(false);
+  const [ChangedText, pressedText] = useState('--');
+  const [isModal, serModal] = useState(false);
 
-//   return (
-//     <View>
-//       <TouchableOpacity
-//         style={styles.checkBox}
-//         onPress={() => clickState(!isChecked)}
-//       >
-//         {isChecked ? (
-//           <View>
-//             <View>
-//               <Image
-//                 style={{ width: 40, height: 40 }}
-//                 resizeMode="contain"
-//                 source={require('../../assets/check_right.png')}
-//               />
-//             </View>
-//           </View>
-//         ) :
-//           (
-//             <View>
-//               <Image
-//                 style={{ width: 40, height: 40 }}
-//                 resizeMode="contain"
-//                 source={require('../../assets/check_no.png')}
-//               />
-//             </View>
-//           )}
-//       </TouchableOpacity>
-//     </View>
-//   );
-// }
+  const handleClick = (text) => {
+    pressedText(text);
+    clickState(false);
+    serModal(false);
+  };
 
-class DropDownMenu extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      listOpen: false,
-    };
-  }
+  const handlePopup = () => {
+    clickState(true);
+    serModal(true);
+  };
 
-  handleClickMenu(val) {
-    this.setState({
-      listOpen: false,
-    });
-    alert(val);
-  }
-
-  toggleList() {
-    this.setState(prevState => ({
-      listOpen: !prevState.listOpen,
-    }));
-  }
-
-  render() {
-    const { listOpen } = this.state;
-    return (
-      <View style={styles.dropDownMenu}>
-        <View onClick={this.toggleList.bind(this)} style={styles.menuButton}>
-          <Text>menu</Text>
-        </View>
-        {listOpen && (
-          <View style={styles.menuBox}>
-            <View style={styles.menuContent}>
-              <View onClick={this.handleClickMenu.bind(this, 1)}><Text>1</Text></View>
-            </View>
-            <View style={styles.menuContent}>
-              <View onClick={this.handleClickMenu.bind(this, 2)}><Text>2</Text></View>
-            </View>
-            <View style={styles.lastMenuContent}>
-              <View onClick={this.handleClickMenu.bind(this, 3)}><Text>3</Text></View>
+  return (
+    <View style={styles.pulldown}>
+      <TouchableOpacity
+        style={styles.checkBox}
+        onPress={() => handlePopup()}
+      >
+        <Text style={styles.title}>
+          {ChangedText}
+        </Text>
+        {isChecked ? (
+          <View hidden={isChecked}>
+            <View>
+              <TouchableOpacity onPress={() => handleClick('1')}><Text style={styles.text}>1</Text></TouchableOpacity>
+              <TouchableOpacity onPress={() => handleClick('2')}><Text style={styles.text}>2</Text></TouchableOpacity>
+              <TouchableOpacity onPress={() => handleClick('3')}><Text style={styles.text}>3</Text></TouchableOpacity>
             </View>
           </View>
-        )}
-      </View>
-    );
-  }
+        ) :
+          (
+            <View />
+          )}
+      </TouchableOpacity>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -99,6 +61,16 @@ const styles = StyleSheet.create({
   lastMenuContent: {
     padding: 5,
   },
+  title: {
+    fontSize: 28,
+    borderWidth: 1,
+    borderColor: 'blue',
+    padding: 5,
+  },
+  text: {
+    fontSize: 28,
+    borderWidth: 1,
+    borderColor: 'blue',
+    padding: 5,
+  },
 });
-
-export default DropDownMenu;
