@@ -55,7 +55,29 @@ export default function MemoList() {
         </View>
       ) :
         (
-          <CircleButton onPress={() => { setAddPressed(true); }}>+</CircleButton>
+          <View style={styles.footer}>
+            {/* <View style={styles.footerButtons}> */}
+            <CircleButton
+              style={{
+                position: 'absolute',
+                bottom: 30,
+                right: 30,
+              }}
+              onPress={() => { setAddPressed(true); }}
+              value={true}
+            >
+              +
+            </CircleButton>
+            <CircleButton
+              style={{
+                position: 'absolute',
+                bottom: 30,
+                left: 30,
+              }}
+              onPress={() => { setAddPressed(true); }}
+              value={false}
+            />
+          </View>
         )}
     </View>
   );
@@ -99,26 +121,15 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 1,
   },
-  memoListDate: {
-    fontSize: 12,
-    color: '#a2a2a2',
-  },
   checkbox: {
     width: 20,
     height: 20,
     borderColor: '#61C8FF',
-  },
-  pulldow: {
-    flex: 1,
   },
   newinput: {
     flex: 1,
     position: 'relative',
     width: '100%',
     alignItems: 'center',
-  },
-  circle: {
-    position: 'absolute',
-    bottom: 10,
   },
 });
