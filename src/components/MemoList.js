@@ -28,13 +28,7 @@ export default function MemoList() {
         data={todos}
         renderItem={({ item }) => <Item text={item.text} />}
         keyExtractor={item => item.id}
-      >
-        <View style={styles.memoListItem}>
-          <CheckBox style={styles.check} />
-          <TextInput style={styles.memoListTitle} onChangeText={t => onChangeText(t)} value={text} />
-          <Dropdown />
-        </View>
-      </FlatList>
+      />
       {isPressedAdd ? (
         <View style={styles.newinput}>
           <DialogInput
@@ -103,28 +97,8 @@ const styles = StyleSheet.create({
     fontSize: 25,
     paddingLeft: 10,
   },
-  memoListItem: {
-    padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#a2a2a2',
-    backgroundColor: '#fff',
-    flexDirection: 'row',
-  },
   check: {
     paddingLeft: 20,
-  },
-  memoListTitle: {
-    fontSize: 18,
-    margin: 10,
-    width: '80%',
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-  },
-  checkbox: {
-    width: 20,
-    height: 20,
-    borderColor: '#61C8FF',
   },
   newinput: {
     flex: 1,
