@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, FlatList, Button, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import DialogInput from 'react-native-dialog-input';
-import Dropdown from './Dropdown';
+import Dropdown from '../elements/Dropdown';
 import CheckBox from '../elements/CheckBox';
 import CircleButton from '../elements/CircleButton';
 

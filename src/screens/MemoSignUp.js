@@ -17,7 +17,7 @@ class MemoSignUp extends React.Component {
             <TextInput value="パスワード" />
           </View>
         </View>
-        <Button onPress={() => { this.props.navigation.navigate('MemoLogin'); }}>
+        <Button onPress={() => { this.props.navigation.navigate('Memolist'); }}>
           Singupする
         </Button>
       </View>
