@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { TouchableOpacity, View, StyleSheet, Text, Modal } from 'react-native';
+import { MyContext } from '../screens/MemoListScreen';
 
-export default function Dropdown() {
+export default function Dropdown(props) {
+  const { state, dispatch } = useContext(MyContext);
+
   const [isChecked, clickState] = useState(false);
   const [ChangedText, pressedText] = useState('--');
   const [isModal, serModal] = useState(false);
+  const { id } = props;
 
   const handleClick = (text) => {
     pressedText(text);
+    dispatch({
+      type: 'SAVE_NUM',
+      actid: id,
+      num: parseInt(text),
+    });
     clickState(false);
     serModal(false);
   };

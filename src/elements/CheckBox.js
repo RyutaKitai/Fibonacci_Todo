@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { TouchableOpacity, StyleSheet, Text, View, Image } from 'react-native';
+import { MyContext } from '../screens/MemoListScreen';
 
 // export default CheckBox;
-export default function CheckBox() {
-  const [isChecked, clickState] = useState(false);
-
+export default function CheckBox(props) {
+  // const [checked, setchecked] = useState(false);
+  const { state, dispatch } = useContext(MyContext);
+  const { isChecked, id } = props;
   return (
     <View>
       <TouchableOpacity
         style={styles.checkBox}
-        onPress={() => clickState(!isChecked)}
+        onPress={
+          () => dispatch({
+            type: 'CHECKED_BOX',
+            actid: id,
+          })
+        }
       >
         {isChecked ? (
           <View>

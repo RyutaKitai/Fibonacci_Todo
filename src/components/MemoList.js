@@ -1,32 +1,42 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, FlatList, Button, TouchableOpacity } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { StyleSheet, View, Text, FlatList, Input, Button, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
+import { MyContext } from '../screens/MemoListScreen';
 import DialogInput from 'react-native-dialog-input';
 import Dropdown from '../elements/Dropdown';
 import CheckBox from '../elements/CheckBox';
 import CircleButton from '../elements/CircleButton';
 
-function Item({ text }) {
+function Item({ text, isChecked, id }) {
   return (
     <View style={styles.item}>
-      <CheckBox style={styles.check} />
+      {/* <Text>{console.log(JSON.stringify(isChecked))}</Text> */}
+      <CheckBox style={styles.check} isChecked={isChecked} id={id} />
       <TextInput style={styles.title}>{text}</TextInput>
-      <Dropdown />
+      <Dropdown id={id} />
     </View>
   );
 }
 
+// value = { state.name }
+// onChange = {
+//   e => dispatch({
+//     type:'CHANGE_NAME',
+//     payload: e.target.value
+// })}
+
 export default function MemoList() {
-  const [text, onChangeText] = useState('');
-  const [todos, setTodos] = useState([]);
+  // const [text, onChangeText] = useState('');
+  // const [todos, setTodos] = useState([]);
   const [id, setID] = useState(1);
   const [isPressedAdd, setAddPressed] = useState(false);
-
+  const { state, dispatch } = useContext(MyContext);
   return (
     <View style={styles.memoList}>
+      <Text>{console.log(JSON.stringify(state.todos))}</Text>
       <FlatList
-        data={todos}
-        renderItem={({ item }) => <Item text={item.text} />}
+        data={state.todos}
+        renderItem={({ item }) => <Item text={item.text} isChecked={item.isChecked} id={item.id} />}
         keyExtractor={item => item.id}
       />
       {isPressedAdd ? (
@@ -37,14 +47,22 @@ export default function MemoList() {
             message={'Enter your TOdolist in here '}
             hintInput={'entere'}
             submitInput={(inputText) => {
-              onChangeText('');
               setAddPressed(false);
-              setTodos(oldTodos => [...oldTodos, { id: id, text: inputText }]);
+              dispatch({
+                type: 'ADD_Todo',
+                newItem: { id: id, isChecked: false, text: inputText, num: 0 },
+              });
               setID(id + 1);
             }}
             closeDialog={() => {
               setAddPressed(false);
             }}
+            onChange={
+              e => dispatch({
+                type: 'CHANGE_NAME',
+                payload: e.target.inputText,
+              })
+            }
           />
         </View>
       ) :
