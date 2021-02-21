@@ -21,13 +21,24 @@ function Item({ text, isChecked, id }) {
 }
 
 export default function MemoList() {
-  const [id, setID] = useState(1);
+  // const [id, setID] = useState(1);
   const [isPressedAdd, setAddPressed] = useState(false);
+  const [isPressedDel, setDelPressed] = useState(false);
   const { state, dispatch } = useContext(MyContext);
+  function delteAllTrue(state1) {
+    setAddPressed(isPressedAdd);
+    // const len_false = state1.todos.filter((item) => item.isChecked === false).Length;
+    dispatch({
+      type: 'DELTE_TODO',
+      // len_false,
+    });
+  }
+
   return (
     <View style={styles.memoList}>
       {/* following for debuging */}
-      {/* <Text>{console.log(JSON.stringify(state.todos))}</Text> */}
+      <Text>{console.log(JSON.stringify(state.todos))}</Text>
+      <Text>{console.log(JSON.stringify(state.todos.length))}</Text>
       <FlatList
         data={state.todos}
         renderItem={({ item }) => <Item text={item.text} isChecked={item.isChecked} id={item.id} />}
@@ -45,10 +56,10 @@ export default function MemoList() {
               dispatch({
                 type: 'ADD_Todo',
                 newItem: {
-                  id, isChecked: false, text: inputText, num: 0,
+                  id: state.todos.length, isChecked: false, text: inputText, num: 0,
                 },
               });
-              setID(id + 1);
+              // setID(id + 1)
             }}
             closeDialog={() => {
               setAddPressed(false);
@@ -81,7 +92,7 @@ export default function MemoList() {
                 bottom: 30,
                 left: 30,
               }}
-              onPress={() => { setAddPressed(true); }}
+              onPress={() => { delteAllTrue(state); }}
               value={false}
             />
           </View>

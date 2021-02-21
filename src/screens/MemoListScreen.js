@@ -1,8 +1,10 @@
 import React, { useReducer } from 'react';
 import { StyleSheet } from 'react-native';
 import MemoList from '../components/MemoList';
+// import console = require('console');
 
-const nowNumList = [1, 2, 3, 5, 8];
+// const nowNumList = [1, 2, 3, 5, 8];
+
 const initialUserState = {
   todos: [{
     id: 0,
@@ -11,6 +13,7 @@ const initialUserState = {
     num: '0',
   }],
 };
+
 function reducer(state, action) {
   switch (action.type) {
     case 'CHANGE_NAME':
@@ -53,6 +56,19 @@ function reducer(state, action) {
             };
           }
           return todo;
+        }),
+      };
+    case 'DELTE_TODO':
+      return {
+        ...state,
+        todos: state.todos.filter((todo) => todo.isChecked === false).map((todo, i) => {
+          return {
+            ...todo,
+            id: i,
+            isChecked: todo.isChecked,
+            text: todo.text,
+            num: action.num,
+          };
         }),
       };
     default:
