@@ -3,9 +3,8 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-// import AppBar from './src/components/AppBar';
 import MemoListScreen from './src/screens/MemoListScreen';
-import MemoSignUp from './src/screens/MemoSignUp';
+import MemoToppage from './src/screens/MemoToppage';
 
 const Stack = createStackNavigator();
 
@@ -16,12 +15,12 @@ export default function App() {
         initialRouteName="MemoSignin"
         screenOptions={{
           headerStyle: { backgroundColor: '#61C8FF' },
-          headerTitleStyle: { color: 'white' },
+          headerTitleStyle: { color: 'white', fontSize: 18 },
           headerTitle: 'Fibonacci Todo',
         }}
       >
         <Stack.Screen name="Memolist" component={MemoListScreen} />
-        <Stack.Screen name="MemoSignin" component={MemoSignUp} />
+        <Stack.Screen name="MemoSignin" component={MemoToppage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

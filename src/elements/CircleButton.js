@@ -1,12 +1,16 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
+import {
+  StyleSheet, Text, TouchableOpacity, Image,
+} from 'react-native';
 
 class CircleButton extends React.Component {
   render() {
     return (
-      <TouchableOpacity style={[styles.circleAddButton, this.props.style]} onPress={this.props.onPress}>
+      <TouchableOpacity
+        style={[styles.circleAddButton, this.props.style]}
+        onPress={this.props.onPress}
+      >
         {this.props.value === true ? <Text style={styles.circleButtonText}>{this.props.children}</Text> : <Image style={{ width: 35, height: 35 }} resizeMode="contain" source={require('../../assets/bin.png')} />}
-        {/* <Text style={styles.circleButtonText}>{this.props.children}</Text> */}
       </TouchableOpacity>
     );
   }

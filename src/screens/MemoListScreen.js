@@ -1,7 +1,6 @@
 import React, { useReducer } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import MemoList from '../components/MemoList';
-// import CircleButton from '../elements/CircleButton';
 
 const nowNumList = [1, 2, 3, 5, 8];
 const initialUserState = {

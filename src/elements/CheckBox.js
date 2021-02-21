@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react';
-import { TouchableOpacity, StyleSheet, Text, View, Image } from 'react-native';
+import React, { useContext } from 'react';
+import {
+  TouchableOpacity, StyleSheet, View, Image,
+} from 'react-native';
 import { MyContext } from '../screens/MemoListScreen';
 
-// export default CheckBox;
 export default function CheckBox(props) {
-  // const [checked, setchecked] = useState(false);
-  const { state, dispatch } = useContext(MyContext);
+  const { dispatch } = useContext(MyContext);
   const { isChecked, id } = props;
   return (
     <View>
@@ -24,16 +24,18 @@ export default function CheckBox(props) {
               <Image
                 style={{ width: 40, height: 40 }}
                 resizeMode="contain"
+                // eslint-disable-next-line global-require
                 source={require('../../assets/check_right.png')}
               />
             </View>
           </View>
-        ) :
-          (
+        )
+          : (
             <View>
               <Image
                 style={{ width: 40, height: 40 }}
                 resizeMode="contain"
+                // eslint-disable-next-line global-require
                 source={require('../../assets/check_no.png')}
               />
             </View>
