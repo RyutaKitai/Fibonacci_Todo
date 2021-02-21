@@ -9,7 +9,7 @@ const initialUserState = {
     id: 0,
     isChecked: true,
     text: 'kommc',
-    num: 0,
+    num: '0',
   }],
 };
 function reducer(state, action) {
