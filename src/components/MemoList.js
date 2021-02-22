@@ -9,23 +9,12 @@ import Dropdown from '../elements/Dropdown';
 import CheckBox from '../elements/CheckBox';
 import CircleButton from '../elements/CircleButton';
 
-function Item({
-  text, isChecked, id, num1,
-}) {
-  return (
-    <View style={styles.item}>
-      {/* <Text>{console.log(JSON.stringify(isChecked))}</Text> */}
-      <CheckBox style={styles.check} isChecked={isChecked} id={id} />
-      <TextInput style={styles.title}>{text}</TextInput>
-      <Dropdown id={id} num1={num1} />
-    </View>
-  );
-}
-
 export default function MemoList() {
   // const [id, setID] = useState(1);
   const [isPressedAdd, setAddPressed] = useState(false);
+  // const [changedtext, setChangedtext] = useState('');
   const { state, dispatch } = useContext(MyContext);
+
   function delteAllTrue() {
     setAddPressed(isPressedAdd);
     dispatch({
@@ -45,10 +34,76 @@ export default function MemoList() {
     });
   }
 
+  // ***
+  // show selected tab's list and change data and state for it
+  // ***
+  function handleTab(tabname) {
+    switch (tabname) {
+      case 'now':
+        dispatch({
+          type: 'CHANGE_TRUE',
+          tab: [true, false, false],
+          useTodo: state.todos,
+        });
+        break;
+      case '中期':
+        dispatch({
+          type: 'CHANGE_TRUE',
+          tab: [false, true, false],
+          useTodo: state.todosMid,
+        });
+        break;
+      case '長期':
+        dispatch({
+          type: 'CHANGE_TRUE',
+          tab: [false, false, true],
+          useTodo: state.todosLong,
+        });
+        break;
+      default:
+        break;
+    }
+  }
+
+  // ***
+  // select and current data{todos, todos_mid, todos_long}
+  // ***
+  // const currentData = typeがtrueのものからstate.{todos, todos_mid, todos_long}で入れて、下で使えるか
+
+  function Item({
+    text, isChecked, id, num1,
+  }) {
+    return (
+      <View style={styles.item}>
+        {/* <Text>{console.log(JSON.stringify(isChecked))}</Text> */}
+        <CheckBox style={styles.check} isChecked={isChecked} id={id} />
+        <TextInput
+          style={styles.title}
+          multiline={true}
+          onSubmitEditing={(event) => {
+            dispatch({
+              type: 'UPDATE_TODO_Text',
+              id1: id,
+              text1: event.nativeEvent.text,
+            });
+          }}
+        >
+          {text}
+        </TextInput>
+        <Dropdown id={id} num1={num1} />
+      </View>
+    );
+  }
+
   return (
     <View style={styles.memoList}>
       {/* following for debuging */}
-      {/* <Text>{console.log(JSON.stringify(state.todos))}</Text> */}
+      {/* <Text>{console.log(JSON.stringify(state.todos_type[0].now))}</Text> */}
+      <View style={styles.tabcontainer}>
+        <TouchableOpacity style={[styles.tab, state.todos_type[0].now ? styles.tabpressed : styles.tabUnpressed]} onPress={() => handleTab('now')}><Text style={styles.tabtext}>now</Text></TouchableOpacity>
+        <TouchableOpacity style={[styles.tab, state.todos_type[0].middle ? styles.tabpressed : styles.tabUnpressed]} onPress={() => handleTab('中期')}><Text style={styles.tabtext}>中期</Text></TouchableOpacity>
+        <TouchableOpacity style={[styles.tab, state.todos_type[0].long ? styles.tabpressed : styles.tabUnpressed]} onPress={() => handleTab('長期')}><Text style={styles.tabtext}>長期</Text></TouchableOpacity>
+      </View>
       <Text>{console.log(JSON.stringify(state.todos))}</Text>
       <View style={styles.sort}>
         <TouchableOpacity onPress={() => handleUpSort()}><Image style={{ width: 30, height: 30 }} resizeMode="contain" source={require('../../assets/up.png')} /></TouchableOpacity>
@@ -74,17 +129,10 @@ export default function MemoList() {
                   id: state.todos.length, isChecked: false, text: inputText, num: 0,
                 },
               });
-              // setID(id + 1)
             }}
             closeDialog={() => {
               setAddPressed(false);
             }}
-            onChange={
-              (e) => dispatch({
-                type: 'CHANGE_NAME',
-                payload: e.target.inputText,
-              })
-            }
           />
         </View>
       )
@@ -132,7 +180,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   title: {
-    width: '80%',
+    width: '75%',
     fontSize: 25,
     paddingLeft: 10,
   },
@@ -149,5 +197,33 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignSelf: 'flex-end',
     paddingRight: 20,
+  },
+  tabcontainer: {
+    flexDirection: 'row',
+    height: 50,
+    borderWidth: 1,
+    textAlignVertical: 'center',
+  },
+  tab: {
+    marginTop: 8,
+    marginHorizontal: 13,
+    borderWidth: 1,
+    // alignSelf: 'stretch',
+    flex: 1,
+    height: 40,
+    width: 80,
+    alignItems: 'center',
+    justifyContent: 'center',
+
+  },
+  tabtext: {
+    fontSize: 18,
+  },
+  tabpressed: {
+    borderColor: '#1E90FF',
+    backgroundColor: '#B9DEED',
+  },
+  tabUnpressed: {
+
   },
 });

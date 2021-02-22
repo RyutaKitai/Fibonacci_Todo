@@ -3,7 +3,24 @@ import { StyleSheet } from 'react-native';
 import MemoList from '../components/MemoList';
 
 const initialUserState = {
+  todos_type: [{
+    now: true,
+    middle: false,
+    long: false,
+  }],
   todos: [{
+    id: 0,
+    isChecked: true,
+    text: 'kommc',
+    num: '0',
+  }],
+  todosMid: [{
+    id: 0,
+    isChecked: true,
+    text: 'kommc',
+    num: '0',
+  }],
+  todosLong: [{
     id: 0,
     isChecked: true,
     text: 'kommc',
@@ -13,10 +30,17 @@ const initialUserState = {
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'CHANGE_NAME':
+    case 'CHANGE_TRUE':
       return {
         ...state,
-        text: action.payload,
+        todos_type: state.todos_type.map((todoType) => {
+          return {
+            ...todoType,
+            now: action.tab[0],
+            middle: action.tab[1],
+            long: action.tab[2],
+          };
+        }),
       };
     case 'ADD_Todo':
       return {
@@ -68,9 +92,6 @@ function reducer(state, action) {
           };
         }),
       };
-    // sort(function (a, b) {
-    //   return a[1] - b[1];
-    // });
     case 'SORT_UP＿TODO':
       return {
         ...state,
@@ -97,6 +118,22 @@ function reducer(state, action) {
           };
         }),
       };
+    case 'UPDATE_TODO_Text':
+      return {
+        ...state,
+        todos: state.todos.map((todo) => {
+          if (todo.id === action.id1) {
+            return {
+              ...todo,
+              id: todo.id,
+              isChecked: todo.isChecked,
+              text: action.text1,
+              num: todo.num,
+            };
+          }
+          return todo;
+        }),
+      };
     default:
       return state;
   }
@@ -104,12 +141,16 @@ function reducer(state, action) {
 
 export const MyContext = React.createContext();
 
-const MyContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialUserState);
-  return <MyContext.Provider value={{ state, dispatch }}>{children}</MyContext.Provider>;
-};
+// const MyContextProvider = ({ children }) => {
+//   const [state, dispatch] = useReducer(reducer, initialUserState);
+//   return <MyContext.Provider value={{ state, dispatch }}>{children}</MyContext.Provider>;
+// };
 
 export default function MemoListScreen() {
+  const MyContextProvider = ({ children }) => {
+    const [state, dispatch] = useReducer(reducer, initialUserState);
+    return <MyContext.Provider value={{ state, dispatch }}>{children}</MyContext.Provider>;
+  };
   return (
     <MyContextProvider style={styles.container}>
       <MemoList />

@@ -37,7 +37,7 @@ export default function Dropdown(props) {
           <View hidden={isChecked}>
             <ScrollView style={styles.numbers}>
               {numlist.map((num) => (
-                <TouchableOpacity onPress={() => handleClick(num)} key={num}>
+                <TouchableOpacity onPress={() => handleClick(num)} key={num} style={styles.textTouch}>
                   <Text style={styles.text}>{num}</Text>
                 </TouchableOpacity>
               ))}
@@ -55,17 +55,19 @@ export default function Dropdown(props) {
 const styles = StyleSheet.create({
   title: {
     fontSize: 28,
-    borderWidth: 1,
-    borderColor: 'blue',
-    padding: 5,
+  },
+  textTouch: {
+    borderTopWidth: 1,
   },
   text: {
     fontSize: 28,
-    borderWidth: 1,
-    borderColor: 'blue',
-    padding: 5,
   },
   numbers: {
-    height: 140,
+    height: 120,
+  },
+  checkBox: {
+    borderWidth: 1,
+    borderColor: '#00CED1',
+    paddingHorizontal: 10,
   },
 });
