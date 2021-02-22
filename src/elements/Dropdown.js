@@ -5,22 +5,22 @@ import {
 import { MyContext } from '../screens/MemoListScreen';
 
 export default function Dropdown(props) {
-  const { dispatch } = useContext(MyContext);
+  const { state, dispatch } = useContext(MyContext);
 
   const [isChecked, clickState] = useState(false);
   const [ChangedText, pressedText] = useState('--');
-  const { id } = props;
+  const { id, num1 } = props;
 
   const numlist = ['1', '2', '3', '5', '8'];
 
-  const handleClick = (text) => {
-    pressedText(text);
+  const handleClick = (text, state1) => {
     dispatch({
       type: 'SAVE_NUM',
       actid: id,
       num: text,
     });
     clickState(false);
+    pressedText(num1);
   };
 
   const handlePopup = () => {
@@ -34,13 +34,13 @@ export default function Dropdown(props) {
         onPress={() => handlePopup()}
       >
         <Text style={styles.title}>
-          {ChangedText}
+          {num1}
         </Text>
         {isChecked ? (
           <View hidden={isChecked}>
             <ScrollView style={styles.numbers}>
               {numlist.map((num) => (
-                <TouchableOpacity onPress={() => handleClick(num)} key={num}>
+                <TouchableOpacity onPress={() => handleClick(num, state)} key={num}>
                   <Text style={styles.text}>{num}</Text>
                 </TouchableOpacity>
               ))}

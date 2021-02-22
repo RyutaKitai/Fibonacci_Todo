@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import {
-  StyleSheet, View, Text, FlatList,
+  StyleSheet, View, Text, FlatList, Button,
 } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import DialogInput from 'react-native-dialog-input';
@@ -9,13 +9,13 @@ import Dropdown from '../elements/Dropdown';
 import CheckBox from '../elements/CheckBox';
 import CircleButton from '../elements/CircleButton';
 
-function Item({ text, isChecked, id }) {
+function Item({ text, isChecked, id, num1 }) {
   return (
     <View style={styles.item}>
       {/* <Text>{console.log(JSON.stringify(isChecked))}</Text> */}
       <CheckBox style={styles.check} isChecked={isChecked} id={id} />
       <TextInput style={styles.title}>{text}</TextInput>
-      <Dropdown id={id} />
+      <Dropdown id={id} num1={num1} />
     </View>
   );
 }
@@ -34,14 +34,22 @@ export default function MemoList() {
     });
   }
 
+  function handleSort() {
+    dispatch({
+      type: 'SORT_TODO',
+      // len_false,
+    });
+  }
+
   return (
     <View style={styles.memoList}>
       {/* following for debuging */}
+      {/* <Text>{console.log(JSON.stringify(state.todos))}</Text> */}
       <Text>{console.log(JSON.stringify(state.todos))}</Text>
-      <Text>{console.log(JSON.stringify(state.todos.length))}</Text>
+      <Button title="sort" onPress={() => handleSort()} />
       <FlatList
         data={state.todos}
-        renderItem={({ item }) => <Item text={item.text} isChecked={item.isChecked} id={item.id} />}
+        renderItem={({ item }) => <Item text={item.text} isChecked={item.isChecked} id={item.id} num1={item.num} />}
         keyExtractor={(item) => item.id}
       />
       {isPressedAdd ? (
