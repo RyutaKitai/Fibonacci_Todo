@@ -71,10 +71,23 @@ function reducer(state, action) {
     // sort(function (a, b) {
     //   return a[1] - b[1];
     // });
-    case 'SORT_TODO':
+    case 'SORT_UP＿TODO':
       return {
         ...state,
         todos: state.todos.sort((a, b) => parseInt(a.num, 10) - parseInt(b.num, 10)).map((todo, i) => {
+          return {
+            ...todo,
+            id: i,
+            isChecked: todo.isChecked,
+            text: todo.text,
+            num: todo.num,
+          };
+        }),
+      };
+    case 'SORT_DOWN＿TODO':
+      return {
+        ...state,
+        todos: state.todos.sort((a, b) => parseInt(b.num, 10) - parseInt(a.num, 10)).map((todo, i) => {
           return {
             ...todo,
             id: i,

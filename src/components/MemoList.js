@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import {
-  StyleSheet, View, Text, FlatList, Button,
+  StyleSheet, View, Text, FlatList, Button, TouchableOpacity, Image,
 } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import DialogInput from 'react-native-dialog-input';
@@ -33,9 +33,15 @@ export default function MemoList() {
     });
   }
 
-  function handleSort() {
+  function handleUpSort() {
     dispatch({
-      type: 'SORT_TODO',
+      type: 'SORT_UP＿TODO',
+    });
+  }
+
+  function handleDownSort() {
+    dispatch({
+      type: 'SORT_DOWN＿TODO',
     });
   }
 
@@ -44,7 +50,10 @@ export default function MemoList() {
       {/* following for debuging */}
       {/* <Text>{console.log(JSON.stringify(state.todos))}</Text> */}
       <Text>{console.log(JSON.stringify(state.todos))}</Text>
-      <Button title="sort" onPress={() => handleSort()} />
+      <View style={styles.sort}>
+        <TouchableOpacity onPress={() => handleUpSort()}><Image style={{ width: 30, height: 30 }} resizeMode="contain" source={require('../../assets/up.png')} /></TouchableOpacity>
+        <TouchableOpacity onPress={() => handleDownSort()}><Image style={{ width: 30, height: 30 }} resizeMode="contain" source={require('../../assets/down.png')} /></TouchableOpacity>
+      </View>
       <FlatList
         data={state.todos}
         renderItem={({ item }) => <Item text={item.text} isChecked={item.isChecked} id={item.id} num1={item.num} />}
@@ -135,5 +144,10 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: '100%',
     alignItems: 'center',
+  },
+  sort: {
+    flexDirection: 'row',
+    alignSelf: 'flex-end',
+    paddingRight: 20,
   },
 });
