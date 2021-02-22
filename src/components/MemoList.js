@@ -9,7 +9,9 @@ import Dropdown from '../elements/Dropdown';
 import CheckBox from '../elements/CheckBox';
 import CircleButton from '../elements/CircleButton';
 
-function Item({ text, isChecked, id, num1 }) {
+function Item({
+  text, isChecked, id, num1,
+}) {
   return (
     <View style={styles.item}>
       {/* <Text>{console.log(JSON.stringify(isChecked))}</Text> */}
@@ -23,21 +25,17 @@ function Item({ text, isChecked, id, num1 }) {
 export default function MemoList() {
   // const [id, setID] = useState(1);
   const [isPressedAdd, setAddPressed] = useState(false);
-  const [isPressedDel, setDelPressed] = useState(false);
   const { state, dispatch } = useContext(MyContext);
-  function delteAllTrue(state1) {
+  function delteAllTrue() {
     setAddPressed(isPressedAdd);
-    // const len_false = state1.todos.filter((item) => item.isChecked === false).Length;
     dispatch({
       type: 'DELTE_TODO',
-      // len_false,
     });
   }
 
   function handleSort() {
     dispatch({
       type: 'SORT_TODO',
-      // len_false,
     });
   }
 
@@ -90,7 +88,7 @@ export default function MemoList() {
                 right: 30,
               }}
               onPress={() => { setAddPressed(true); }}
-              value={true}
+              value
             >
               +
             </CircleButton>
@@ -100,7 +98,7 @@ export default function MemoList() {
                 bottom: 30,
                 left: 30,
               }}
-              onPress={() => { delteAllTrue(state); }}
+              onPress={() => { delteAllTrue(); }}
               value={false}
             />
           </View>

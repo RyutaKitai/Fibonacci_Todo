@@ -1,9 +1,6 @@
 import React, { useReducer } from 'react';
 import { StyleSheet } from 'react-native';
 import MemoList from '../components/MemoList';
-// import console = require('console');
-
-// const nowNumList = [1, 2, 3, 5, 8];
 
 const initialUserState = {
   todos: [{
@@ -67,7 +64,7 @@ function reducer(state, action) {
             id: i,
             isChecked: todo.isChecked,
             text: todo.text,
-            num: action.num,
+            num: todo.num,
           };
         }),
       };
