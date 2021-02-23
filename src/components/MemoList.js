@@ -1,7 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useLayoutEffect } from 'react';
 import {
   StyleSheet, View, Text, FlatList, Button, TouchableOpacity, Image,
 } from 'react-native';
+import * as SQLite from 'expo-sqlite';
+import * as FileSystem from 'expo-file-system';
 import { TextInput } from 'react-native-gesture-handler';
 import DialogInput from 'react-native-dialog-input';
 import { MyContext } from '../screens/MemoListScreen';
@@ -66,9 +68,47 @@ export default function MemoList() {
   }
 
   // ***
-  // select and current data{todos, todos_mid, todos_long}
+  // Database from here
   // ***
-  // const currentData = typeがtrueのものからstate.{todos, todos_mid, todos_long}で入れて、下で使えるか
+  const [items, setItems] = useState([]);
+  const [lenTable, setLenTable] = useState(0);
+
+  const db = SQLite.openDatabase('DB.db');
+
+  const showAllData = () => {
+    db.transaction(
+      (tx) => {
+        tx.executeSql(
+          'select * from todoNow;',
+          null,
+          (_, resultSet) => {
+            // SUCCESS
+            const temp = [];
+            for (let i = 0; i < resultSet.rows.length; i++) {
+              temp.push(resultSet.rows.item(i));
+            }
+            setItems(temp);
+            setLenTable(resultSet.rows.length);
+            console.log('success_selectAll');
+          },
+          () => {
+            console.log('fail');
+            return true; // ロールバックする場合はtrueを返す
+          }, // 失敗時のコールバック関数
+        );
+      },
+      () => {
+        console.log('fail');
+      }, // 失敗時のコールバック関数
+      () => {
+        console.log('success');
+      }, // 成功時のコールバック関数
+    );
+  };
+
+  useLayoutEffect(() => {
+    showAllData();
+  }, []);
 
   function Item({
     text, isChecked, id, num1,
@@ -76,7 +116,7 @@ export default function MemoList() {
     return (
       <View style={styles.item}>
         {/* <Text>{console.log(JSON.stringify(isChecked))}</Text> */}
-        <CheckBox style={styles.check} isChecked={isChecked} id={id} />
+        <CheckBox style={styles.check} iscahcke={isChecked} id={id} />
         <TextInput
           style={styles.title}
           multiline={true}
@@ -99,7 +139,7 @@ export default function MemoList() {
     <View style={styles.memoList}>
       {/* following for debuging */}
       {/* <Text>{console.log(JSON.stringify(state.todos_type[0].now))}</Text> */}
-      <View style={styles.tabcontainer}>
+      {/* <View style={styles.tabcontainer}>
         <TouchableOpacity style={[styles.tab, state.todos_type[0].now ? styles.tabpressed : styles.tabUnpressed]} onPress={() => handleTab('now')}><Text style={styles.tabtext}>now</Text></TouchableOpacity>
         <TouchableOpacity style={[styles.tab, state.todos_type[0].middle ? styles.tabpressed : styles.tabUnpressed]} onPress={() => handleTab('中期')}><Text style={styles.tabtext}>中期</Text></TouchableOpacity>
         <TouchableOpacity style={[styles.tab, state.todos_type[0].long ? styles.tabpressed : styles.tabUnpressed]} onPress={() => handleTab('長期')}><Text style={styles.tabtext}>長期</Text></TouchableOpacity>
@@ -108,13 +148,13 @@ export default function MemoList() {
       <View style={styles.sort}>
         <TouchableOpacity onPress={() => handleUpSort()}><Image style={{ width: 30, height: 30 }} resizeMode="contain" source={require('../../assets/up.png')} /></TouchableOpacity>
         <TouchableOpacity onPress={() => handleDownSort()}><Image style={{ width: 30, height: 30 }} resizeMode="contain" source={require('../../assets/down.png')} /></TouchableOpacity>
-      </View>
+      </View> */}
       <FlatList
-        data={state.todos}
-        renderItem={({ item }) => <Item text={item.text} isChecked={item.isChecked} id={item.id} num1={item.num} />}
+        data={items}
+        renderItem={({ item }) => <Item text={item.bodyText} isChecked={item.isChacked} id={item.id} num1={item.number} />}
         keyExtractor={(item) => item.id}
       />
-      {isPressedAdd ? (
+      {/* {isPressedAdd ? (
         <View style={styles.newinput}>
           <DialogInput
             isDialogVisible={isPressedAdd}
@@ -159,7 +199,7 @@ export default function MemoList() {
               value={false}
             />
           </View>
-        )}
+        )} */}
     </View>
   );
 }

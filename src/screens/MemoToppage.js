@@ -18,7 +18,7 @@ class MemoToppage extends React.Component {
           // eslint-disable-next-line global-require
           source={require('../../assets/fibo-todo2.png')}
         />
-        <Button onPress={() => { this.props.navigation.navigate('DBexamplePage'); }}>
+        <Button onPress={() => { this.props.navigation.navigate('Memolist'); }}>
           メモする
         </Button>
         {/* <Text>{console.log(data)}</Text>
