@@ -3,9 +3,12 @@ import {
   StyleSheet, View, Text, Image,
 } from 'react-native';
 import Button from '../elements/Button';
+// import SQLiteData from '../../db/db';
 
 class MemoToppage extends React.Component {
   render() {
+    // const db = SQLiteData();
+    // const data = SQLiteShow();
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Top画面</Text>
@@ -15,9 +18,11 @@ class MemoToppage extends React.Component {
           // eslint-disable-next-line global-require
           source={require('../../assets/fibo-todo2.png')}
         />
-        <Button onPress={() => { this.props.navigation.navigate('Memolist'); }}>
+        <Button onPress={() => { this.props.navigation.navigate('DBexamplePage'); }}>
           メモする
         </Button>
+        {/* <Text>{console.log(data)}</Text>
+        <Text>{data}</Text> */}
       </View>
     );
   }
