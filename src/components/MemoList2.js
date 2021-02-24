@@ -69,7 +69,7 @@ export default function MemoList2() {
             console.log('success_updatetext');
           },
           () => {
-            console.log('fail_updatetext');
+            // console.log('fail_updatetext');
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
         );
@@ -148,11 +148,11 @@ export default function MemoList2() {
             }
             setItems(temp);
             setLenTable(resultSet.rows.length);
-            console.log(temp);
+            // console.log(temp);
             console.log('success_sortdown');
           },
           () => {
-            console.log('fail');
+            // console.log('fail');
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
         );
@@ -180,11 +180,11 @@ export default function MemoList2() {
             }
             setItems(temp);
             setLenTable(resultSet.rows.length);
-            console.log(temp);
+            // console.log(temp);
             console.log('success_sortdown');
           },
           () => {
-            console.log('fail');
+            // console.log('fail');
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
         );

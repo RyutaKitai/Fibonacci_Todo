@@ -38,11 +38,11 @@ export default function MemoList1() {
             }
             setItems(temp);
             setLenTable(resultSet.rows.length);
-            console.log(temp);
+            // console.log(temp);
             console.log('success_selectAll');
           },
           () => {
-            console.log('fail');
+            // console.log('fail');
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
         );
@@ -69,7 +69,7 @@ export default function MemoList1() {
             console.log('success_updatetext');
           },
           () => {
-            console.log('fail_updatetext');
+            // console.log('fail_updatetext');
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
         );
@@ -94,7 +94,7 @@ export default function MemoList1() {
             console.log('success_insert');
           }, // 成功時のコールバック関数
           () => {
-            console.log('fail_insert');
+            // console.log('fail_insert');
 
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
@@ -120,7 +120,7 @@ export default function MemoList1() {
             console.log('success_deleteAll');
           }, // 成功時のコールバック関数
           () => {
-            console.log('fail_delete');
+            // console.log('fail_delete');
 
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
@@ -148,11 +148,11 @@ export default function MemoList1() {
             }
             setItems(temp);
             setLenTable(resultSet.rows.length);
-            console.log(temp);
+            // console.log(temp);
             console.log('success_sortdown');
           },
           () => {
-            console.log('fail');
+            // console.log('fail');
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
         );
@@ -180,11 +180,11 @@ export default function MemoList1() {
             }
             setItems(temp);
             setLenTable(resultSet.rows.length);
-            console.log(temp);
+            // console.log(temp);
             console.log('success_sortdown');
           },
           () => {
-            console.log('fail');
+            // console.log('fail');
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
         );

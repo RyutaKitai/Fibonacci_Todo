@@ -51,7 +51,7 @@ export default function Dropdown(props) {
   const updateData = (hereid, number) => {
     db.transaction(
       (tx) => {
-        if (currentTableState[0] === 1) {
+        if (currentTableState[0].useTodoNow === 1) {
           tx.executeSql(
             'update todoNow set number=? where id=?;',
             [number, hereid],
@@ -66,7 +66,7 @@ export default function Dropdown(props) {
               return true; // ロールバックする場合はtrueを返す
             }, // 失敗時のコールバック関数
           );
-        } else if (currentTableState[1] === 1) {
+        } else if (currentTableState[0].useTodoMid === 1) {
           tx.executeSql(
             'update todoMid set number=? where id=?;',
             [number, hereid],

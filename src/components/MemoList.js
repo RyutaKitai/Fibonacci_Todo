@@ -38,11 +38,11 @@ export default function MemoList() {
             }
             setItems(temp);
             setLenTable(resultSet.rows.length);
-            console.log(temp);
+            // console.log(temp);
             console.log('success_selectAll');
           },
           () => {
-            console.log('fail');
+            // console.log('fail');
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
         );
@@ -69,7 +69,7 @@ export default function MemoList() {
             console.log('success_updatetext');
           },
           () => {
-            console.log('fail_updatetext');
+            // console.log('fail_updatetext');
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
         );
@@ -94,7 +94,7 @@ export default function MemoList() {
             console.log('success_insert');
           }, // 成功時のコールバック関数
           () => {
-            console.log('fail_insert');
+            // console.log('fail_insert');
 
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
@@ -148,11 +148,11 @@ export default function MemoList() {
             }
             setItems(temp);
             setLenTable(resultSet.rows.length);
-            console.log(temp);
+            // console.log(temp);
             console.log('success_sortdown');
           },
           () => {
-            console.log('fail');
+            // console.log('fail');
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
         );
@@ -180,11 +180,11 @@ export default function MemoList() {
             }
             setItems(temp);
             setLenTable(resultSet.rows.length);
-            console.log(temp);
+            // console.log(temp);
             console.log('success_sortdown');
           },
           () => {
-            console.log('fail');
+            // console.log('fail');
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
         );
@@ -198,31 +198,6 @@ export default function MemoList() {
     );
   };
 
-  // const updateOrderID = () => {
-  //   // DBの作成先を出力
-  //   db.transaction(
-  //     (tx) => {
-  //       tx.executeSql(
-  //         'SET @i := 0; UPDATE todoNow SET order_id = (@i := @i +1);',
-  //         null,
-  //         () => {
-  //           console.log('success_updateOrderId');
-  //         }, // 成功時のコールバック関数
-  //         () => {
-  //           console.log('fail_updateOrderId');
-
-  //           return true; // ロールバックする場合はtrueを返す
-  //         }, // 失敗時のコールバック関数
-  //       );
-  //     },
-  //     () => {
-  //       console.log('fail all');
-  //     }, // 失敗時のコールバック関数
-  //     () => {
-  //       console.log('success');
-  //     }, // 成功時のコールバック関数
-  //   );
-  // };
   useLayoutEffect(() => {
     // setUsedTable(currentTable);
     showAllData();

@@ -49,9 +49,10 @@ export default function CheckBox(props) {
     } else {
       newIsChecked = 0;
     }
+    console.log(currentTableState[0].useTodoLong);
     db.transaction(
       (tx) => {
-        if (currentTableState[0] === 1) {
+        if (currentTableState[0].useTodoNow === 1) {
           tx.executeSql(
             'update todoNow set isChacked=? where id=?;',
             [newIsChecked, hereid],
@@ -66,7 +67,7 @@ export default function CheckBox(props) {
               return true; // ロールバックする場合はtrueを返す
             }, // 失敗時のコールバック関数
           );
-        } else if (currentTableState[1] === 1) {
+        } else if (currentTableState[0].useTodoMid === 1) {
           tx.executeSql(
             'update todoMid set isChacked=? where id=?;',
             [newIsChecked, hereid],
