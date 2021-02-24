@@ -1,160 +1,87 @@
-import React, { useReducer } from 'react';
-import { StyleSheet } from 'react-native';
+import React, { useState, useLayoutEffect } from 'react';
+import {
+  StyleSheet, View, TouchableOpacity, Text,
+} from 'react-native';
+import * as SQLite from 'expo-sqlite';
 import MemoList from '../components/MemoList';
-
-const initialUserState = {
-  todos_type: [{
-    now: true,
-    middle: false,
-    long: false,
-  }],
-  todos: [{
-    id: 0,
-    isChecked: true,
-    text: 'kommc',
-    num: '0',
-  }],
-  todosMid: [{
-    id: 0,
-    isChecked: true,
-    text: 'kommc',
-    num: '0',
-  }],
-  todosLong: [{
-    id: 0,
-    isChecked: true,
-    text: 'kommc',
-    num: '0',
-  }],
-};
-
-function reducer(state, action) {
-  switch (action.type) {
-    case 'CHANGE_TRUE':
-      return {
-        ...state,
-        todos_type: state.todos_type.map((todoType) => {
-          return {
-            ...todoType,
-            now: action.tab[0],
-            middle: action.tab[1],
-            long: action.tab[2],
-          };
-        }),
-      };
-    case 'ADD_Todo':
-      return {
-        ...state,
-        todos: [...state.todos, action.newItem],
-      };
-    case 'CHECKED_BOX':
-      return {
-        ...state,
-        todos: state.todos.map((todo) => {
-          if (todo.id === action.actid) {
-            return {
-              ...todo,
-              id: todo.id,
-              isChecked: !todo.isChecked,
-              text: todo.text,
-              num: todo.num,
-            };
-          }
-          return todo;
-        }),
-      };
-    case 'SAVE_NUM':
-      return {
-        ...state,
-        todos: state.todos.map((todo) => {
-          if (todo.id === action.actid) {
-            return {
-              ...todo,
-              id: todo.id,
-              isChecked: todo.isChecked,
-              text: todo.text,
-              num: action.num,
-            };
-          }
-          return todo;
-        }),
-      };
-    case 'DELTE_TODO':
-      return {
-        ...state,
-        todos: state.todos.filter((todo) => todo.isChecked === false).map((todo, i) => {
-          return {
-            ...todo,
-            id: i,
-            isChecked: todo.isChecked,
-            text: todo.text,
-            num: todo.num,
-          };
-        }),
-      };
-    case 'SORT_UP＿TODO':
-      return {
-        ...state,
-        todos: state.todos.sort((a, b) => parseInt(a.num, 10) - parseInt(b.num, 10)).map((todo, i) => {
-          return {
-            ...todo,
-            id: i,
-            isChecked: todo.isChecked,
-            text: todo.text,
-            num: todo.num,
-          };
-        }),
-      };
-    case 'SORT_DOWN＿TODO':
-      return {
-        ...state,
-        todos: state.todos.sort((a, b) => parseInt(b.num, 10) - parseInt(a.num, 10)).map((todo, i) => {
-          return {
-            ...todo,
-            id: i,
-            isChecked: todo.isChecked,
-            text: todo.text,
-            num: todo.num,
-          };
-        }),
-      };
-    case 'UPDATE_TODO_Text':
-      return {
-        ...state,
-        todos: state.todos.map((todo) => {
-          if (todo.id === action.id1) {
-            return {
-              ...todo,
-              id: todo.id,
-              isChecked: todo.isChecked,
-              text: action.text1,
-              num: todo.num,
-            };
-          }
-          return todo;
-        }),
-      };
-    default:
-      return state;
-  }
-}
-
-export const MyContext = React.createContext();
-
-// const MyContextProvider = ({ children }) => {
-//   const [state, dispatch] = useReducer(reducer, initialUserState);
-//   return <MyContext.Provider value={{ state, dispatch }}>{children}</MyContext.Provider>;
-// };
+import MemoList1 from '../components/MemoList1';
+import MemoList2 from '../components/MemoList2';
 
 export default function MemoListScreen() {
-  const MyContextProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(reducer, initialUserState);
-    return <MyContext.Provider value={{ state, dispatch }}>{children}</MyContext.Provider>;
+  const [state, setState] = useState([1, 0, 0]);
+  // const [tableName, setTableName] = useState('todoNow');dd
+
+  const db = SQLite.openDatabase('DB.db');
+
+  const updateTableData = (pState) => {
+    db.transaction(
+      (tx) => {
+        tx.executeSql(
+          'update useTable set useTodoNow=?, useTodoMid=?, useTodoLong=?;',
+          [pState[0], pState[1], pState[2]],
+          () => {
+            // SUCCESS
+            // clickState(false);
+            // setNumber(number);
+            setState([pState[0], pState[1], pState[2]])
+            console.log('success_updatetext');
+          },
+          () => {
+            console.log('fail_updatetext');
+            return true; // ロールバックする場合はtrueを返す
+          }, // 失敗時のコールバック関数
+        );
+      },
+      () => {
+        console.log('fail');
+      }, // 失敗時のコールバック関数
+      () => {
+        console.log('success');
+      }, // 成功時のコールバック関数
+    );
   };
+
+  // ***
+  // show selected tab's list and change data and state for it
+  // ***
+  function handleTab(tabname) {
+    switch (tabname) {
+      case 'now':
+        updateTableData([1, 0, 0]);
+        break;
+      case '中期':
+        updateTableData([0, 1, 0]);
+        break;
+      case '長期':
+        updateTableData([0, 0, 1]);
+        break;
+      default:
+        break;
+    }
+  }
+
+  useLayoutEffect(() => {
+    setState([1, 0, 0]);
+    // console.log(usedTable);
+  }, []);
+
   return (
-    <MyContextProvider style={styles.container}>
-      <MemoList />
-    </MyContextProvider>
+    <View style={styles.container}>
+      <View style={styles.tabcontainer}>
+        <TouchableOpacity style={[styles.tab, state[0] ? styles.tabpressed : styles.tabUnpressed]} onPress={() => handleTab('now')}>
+          <Text style={styles.tabtext}>now</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.tab, state[1] ? styles.tabpressed : styles.tabUnpressed]} onPress={() => handleTab('中期')}>
+          <Text style={styles.tabtext}>中期</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.tab, state[2] ? styles.tabpressed : styles.tabUnpressed]} onPress={() => handleTab('長期')}>
+          <Text style={styles.tabtext}>長期</Text>
+        </TouchableOpacity>
+      </View>
+      {state[0] === 1 ? <MemoList /> : null}
+      {state[1] === 1 ? <MemoList1 /> : null}
+      {state[2] === 1 ? <MemoList2 /> : null}
+    </View>
   );
 }
 
@@ -162,5 +89,33 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
+  },
+  tabcontainer: {
+    flexDirection: 'row',
+    height: 50,
+    borderWidth: 1,
+    textAlignVertical: 'center',
+  },
+  tab: {
+    marginTop: 8,
+    marginHorizontal: 13,
+    borderWidth: 1,
+    // alignSelf: 'stretch',
+    flex: 1,
+    height: 40,
+    width: 80,
+    alignItems: 'center',
+    justifyContent: 'center',
+
+  },
+  tabtext: {
+    fontSize: 18,
+  },
+  tabpressed: {
+    borderColor: '#1E90FF',
+    backgroundColor: '#B9DEED',
+  },
+  tabUnpressed: {
+
   },
 });

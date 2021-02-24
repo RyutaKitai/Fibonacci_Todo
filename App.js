@@ -20,7 +20,19 @@ export default function App() {
     db.transaction(
       (tx) => {
         tx.executeSql(
-          'create table if not exists todoNow (id integer primary key not null, isChacked BIT, bodyText text, number integer);',
+          'create table if not exists useTable (id integer primary key not null, useTodoNow BIT, useTodoMid BIT, useTodoLong BIT);',
+          null,
+          () => {
+            console.log('success_create_usetable');
+          },
+          () => {
+            console.log('fail_create_usetable');
+
+            return true;
+          },
+        );
+        tx.executeSql(
+          'create table if not exists todoNow (id integer primary key not null, order_id integer, isChacked BIT, bodyText text, number integer);',
           null,
           () => {
             console.log('success_create1');
@@ -32,7 +44,7 @@ export default function App() {
           },
         );
         tx.executeSql(
-          'create table if not exists todoMid (id integer primary key not null, isChacked BIT, bodyText text, number integer);',
+          'create table if not exists todoMid (id integer primary key not null, order_id integer, isChacked BIT, bodyText text, number integer);',
           null,
           () => {
             console.log('success_create2');
@@ -44,7 +56,7 @@ export default function App() {
           },
         );
         tx.executeSql(
-          'create table if not exists todoLong (id integer primary key not null, isChacked BIT, bodyText text, number integer);',
+          'create table if not exists todoLong (id integer primary key not null, order_id integer, isChacked BIT, bodyText text, number integer);',
           null,
           () => {
             console.log('success_create3');
@@ -56,8 +68,20 @@ export default function App() {
           },
         );
         tx.executeSql(
-          'insert into todoNow (id, isChacked, bodyText, number) values (?, ?, ?, ?)',
-          [1, 0, 'Todo', 0],
+          'insert into useTable (id, useTodoNow, useTodoMid, useTodoLong) values (?, ?, ?, ?)',
+          [1, 1, 0, 0],
+          () => {
+            console.log('success_insert_usetable');
+          }, // 成功時のコールバック関数
+          () => {
+            console.log('fail_insert_usetable');
+
+            return true; // ロールバックする場合はtrueを返す
+          }, // 失敗時のコールバック関数
+        );
+        tx.executeSql(
+          'insert into todoNow (id, order_id, isChacked, bodyText, number) values (?, ?, ?, ?, ?)',
+          [1, 1, 0, 'Todo', 0],
           () => {
             console.log('success_insert1');
           }, // 成功時のコールバック関数
@@ -68,8 +92,8 @@ export default function App() {
           }, // 失敗時のコールバック関数
         );
         tx.executeSql(
-          'insert into todoMid (id, isChacked, bodyText, number) values (?, ?, ?, ?);',
-          [1, 0, 'Todo', 0],
+          'insert into todoMid (id, order_id, isChacked, bodyText, number) values (?, ?, ?, ?, ?);',
+          [1, 1, 0, 'Todo', 0],
           () => {
             console.log('success_insert2');
           }, // 成功時のコールバック関数
@@ -80,8 +104,8 @@ export default function App() {
           }, // 失敗時のコールバック関数
         );
         tx.executeSql(
-          'insert into todoLong (id, isChacked, bodyText, number) values (?, ?, ?, ?);',
-          [1, 0, 'Todo', 0],
+          'insert into todoLong (id, order_id, isChacked, bodyText, number) values (?, ?, ?, ?, ?);',
+          [1, 1, 0, 'Todo', 0],
           () => {
             console.log('success_insert3');
           }, // 成功時のコールバック関数

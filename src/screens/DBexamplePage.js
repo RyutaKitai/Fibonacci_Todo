@@ -82,54 +82,66 @@ export default function DBexamplePage() {
     );
   };
   // テーブル初期化 in the development
-  // const deleteAllTable = () => {
-  //   db.transaction(
-  //     (tx) => {
-  //       tx.executeSql(
-  //         'drop table todoNow;',
-  //         null,
-  //         () => {
-  //           console.log('success');
-  //         }, // 成功時のコールバック関数
-  //         () => {
-  //           console.log('fail');
+  const deleteAllTable = () => {
+    db.transaction(
+      (tx) => {
+        tx.executeSql(
+          'drop table todoNow;',
+          null,
+          () => {
+            console.log('success');
+          }, // 成功時のコールバック関数
+          () => {
+            console.log('fail');
 
-  //           return true; // ロールバックする場合はtrueを返す
-  //         }, // 失敗時のコールバック関数
-  //       );
-  //       tx.executeSql(
-  //         'drop table todoMid;',
-  //         null,
-  //         () => {
-  //           console.log('success');
-  //         }, // 成功時のコールバック関数
-  //         () => {
-  //           console.log('fail');
+            return true; // ロールバックする場合はtrueを返す
+          }, // 失敗時のコールバック関数
+        );
+        tx.executeSql(
+          'drop table todoMid;',
+          null,
+          () => {
+            console.log('success');
+          }, // 成功時のコールバック関数
+          () => {
+            console.log('fail');
 
-  //           return true; // ロールバックする場合はtrueを返す
-  //         }, // 失敗時のコールバック関数
-  //       );
-  //       tx.executeSql(
-  //         'drop table todoLong;',
-  //         null,
-  //         () => {
-  //           console.log('success');
-  //         }, // 成功時のコールバック関数
-  //         () => {
-  //           console.log('fail');
+            return true; // ロールバックする場合はtrueを返す
+          }, // 失敗時のコールバック関数
+        );
+        tx.executeSql(
+          'drop table todoLong;',
+          null,
+          () => {
+            console.log('success');
+          }, // 成功時のコールバック関数
+          () => {
+            console.log('fail');
 
-  //           return true; // ロールバックする場合はtrueを返す
-  //         }, // 失敗時のコールバック関数
-  //       );
-  //     },
-  //     () => {
-  //       console.log('fail');
-  //     }, // 失敗時のコールバック関数
-  //     () => {
-  //       console.log('success_del');
-  //     }, // 成功時のコールバック関数
-  //   );
-  // };
+            return true; // ロールバックする場合はtrueを返す
+          }, // 失敗時のコールバック関数
+        );
+        tx.executeSql(
+          'drop table useTable;',
+          null,
+          () => {
+            console.log('success');
+          }, // 成功時のコールバック関数
+          () => {
+            console.log('fail');
+
+            return true; // ロールバックする場合はtrueを返す
+          }, // 失敗時のコールバック関数
+        );
+      },
+      () => {
+        console.log('fail');
+      }, // 失敗時のコールバック関数
+      () => {
+        console.log('success_del');
+      }, // 成功時のコールバック関数
+    );
+  };
 
   // const insertData = (id, name) => {
   //   db.transaction(
@@ -212,7 +224,7 @@ export default function DBexamplePage() {
     <View>
       <Text>{console.log(items)}</Text>
       <Text>{lenTable}</Text>
-      <Button title="press" onPress={() => { showAllData(); }} />
+      <Button title="press" onPress={() => { deleteAllTable(); }} />
       {/* <Text>{items.length > 0 && items[0].name}</Text> */}
       <FlatList
         data={items}

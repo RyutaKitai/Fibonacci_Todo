@@ -10,7 +10,7 @@ import Dropdown from '../elements/Dropdown';
 import CheckBox from '../elements/CheckBox';
 import CircleButton from '../elements/CircleButton';
 
-export default function MemoList() {
+export default function MemoList2() {
   // const [id, setID] = useState(1);
   // const { currentTable } = props;
   const [isPressedAdd, setAddPressed] = useState(false);
@@ -28,7 +28,7 @@ export default function MemoList() {
     db.transaction(
       (tx) => {
         tx.executeSql(
-          'select * from todoNow;',
+          'select * from todoLong;',
           null,
           (_, resultSet) => {
             // SUCCESS
@@ -60,7 +60,7 @@ export default function MemoList() {
     db.transaction(
       (tx) => {
         tx.executeSql(
-          'update todoNow set bodyText=? where id=?;',
+          'update todoLong set bodyText=? where id=?;',
           [newText, hereid],
           () => {
             // SUCCESS
@@ -88,7 +88,7 @@ export default function MemoList() {
     db.transaction(
       (tx) => {
         tx.executeSql(
-          'insert into todoNow (id, order_id, isChacked, bodyText, number) values ((SELECT id FROM todoNow WHERE id=(SELECT max(id) FROM todoNow))+1, ?, ?, ?, ?);',
+          'insert into todoLong (id, order_id, isChacked, bodyText, number) values ((SELECT id FROM todoLong WHERE id=(SELECT max(id) FROM todoLong))+1, ?, ?, ?, ?);',
           [newid, 0, newtext, 0],
           () => {
             console.log('success_insert');
@@ -114,7 +114,7 @@ export default function MemoList() {
     db.transaction(
       (tx) => {
         tx.executeSql(
-          'delete from todoNow where isChacked=?;',
+          'delete from todoLong where isChacked=?;',
           [1],
           () => {
             console.log('success_deleteAll');
@@ -138,7 +138,7 @@ export default function MemoList() {
     db.transaction(
       (tx) => {
         tx.executeSql(
-          'select * from todoNow order by number ASC;',
+          'select * from todoLong order by number ASC;',
           null,
           (_, resultSet) => {
             // SUCCESS
@@ -170,7 +170,7 @@ export default function MemoList() {
     db.transaction(
       (tx) => {
         tx.executeSql(
-          'select * from todoNow order by number DESC;',
+          'select * from todoLong order by number DESC;',
           null,
           (_, resultSet) => {
             // SUCCESS
@@ -203,7 +203,7 @@ export default function MemoList() {
   //   db.transaction(
   //     (tx) => {
   //       tx.executeSql(
-  //         'SET @i := 0; UPDATE todoNow SET order_id = (@i := @i +1);',
+  //         'SET @i := 0; UPDATE todoLong SET order_id = (@i := @i +1);',
   //         null,
   //         () => {
   //           console.log('success_updateOrderId');

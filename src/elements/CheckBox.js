@@ -3,23 +3,29 @@ import {
   TouchableOpacity, StyleSheet, View, Image,
 } from 'react-native';
 import * as SQLite from 'expo-sqlite';
-import { MyContext } from '../screens/MemoListScreen';
 
 export default function CheckBox(props) {
   // const { dispatch } = useContext(MyContext);
   const { iscahcke, id } = props;
   const db = SQLite.openDatabase('DB.db');
   const [isChecked, setisChecked] = useState(iscahcke);
-  const selectChacked = (hereid) => {
+  const [currentTableState, setCurrentTableState] = useState([]);
+
+  const selectTable = () => {
     db.transaction(
       (tx) => {
         tx.executeSql(
-          'select isChacked from todoNow where id=? ;',
-          [hereid],
+          'select * from useTable where id=1;',
+          null,
           (_, resultSet) => {
             // SUCCESS
-            setisChecked(resultSet.rows.item(0).isChacked);
+            const temp = [];
+            for (let i = 0; i < resultSet.rows.length; i++) {
+              temp.push(resultSet.rows.item(i));
+            }
+            setCurrentTableState(temp);
             console.log(resultSet);
+            console.log('success_selectTable');
           },
           () => {
             console.log('fail');
@@ -45,20 +51,52 @@ export default function CheckBox(props) {
     }
     db.transaction(
       (tx) => {
-        tx.executeSql(
-          'update todoNow set isChacked=? where id=?;',
-          [newIsChecked, hereid],
-          () => {
-            // SUCCESS
-            console.log(newIsChecked);
-            setisChecked(newIsChecked);
-            console.log('success_update');
-          },
-          () => {
-            console.log('fail_update');
-            return true; // ロールバックする場合はtrueを返す
-          }, // 失敗時のコールバック関数
-        );
+        if (currentTableState[0] === 1) {
+          tx.executeSql(
+            'update todoNow set isChacked=? where id=?;',
+            [newIsChecked, hereid],
+            () => {
+              // SUCCESS
+              console.log(newIsChecked);
+              setisChecked(newIsChecked);
+              console.log('success_update');
+            },
+            () => {
+              console.log('fail_update');
+              return true; // ロールバックする場合はtrueを返す
+            }, // 失敗時のコールバック関数
+          );
+        } else if (currentTableState[1] === 1) {
+          tx.executeSql(
+            'update todoMid set isChacked=? where id=?;',
+            [newIsChecked, hereid],
+            () => {
+              // SUCCESS
+              console.log(newIsChecked);
+              setisChecked(newIsChecked);
+              console.log('success_update');
+            },
+            () => {
+              console.log('fail_update');
+              return true; // ロールバックする場合はtrueを返す
+            }, // 失敗時のコールバック関数
+          );
+        } else {
+          tx.executeSql(
+            'update todoLong set isChacked=? where id=?;',
+            [newIsChecked, hereid],
+            () => {
+              // SUCCESS
+              console.log(newIsChecked);
+              setisChecked(newIsChecked);
+              console.log('success_update');
+            },
+            () => {
+              console.log('fail_update');
+              return true; // ロールバックする場合はtrueを返す
+            }, // 失敗時のコールバック関数
+          );
+        }
       },
       () => {
         console.log('fail');
@@ -70,7 +108,9 @@ export default function CheckBox(props) {
   };
 
   useLayoutEffect(() => {
-    selectChacked(id);
+    setisChecked(iscahcke);
+    selectTable();
+    console.log(currentTableState);
   }, []);
 
   return (
