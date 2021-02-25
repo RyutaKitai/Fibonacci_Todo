@@ -1,13 +1,14 @@
 import React, { useLayoutEffect } from 'react';
+import { Image } from 'react-native';
 import * as SQLite from 'expo-sqlite';
 import * as FileSystem from 'expo-file-system';
-// import { StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import MemoListScreen from './src/screens/MemoListScreen';
 import MemoToppage from './src/screens/MemoToppage';
 import ResetAllData from './src/screens/ResetAllData';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Stack = createStackNavigator();
 
@@ -138,7 +139,24 @@ export default function App() {
           headerTitle: 'Fibonacci Todo',
         }}
       >
-        <Stack.Screen name="Memolist" component={MemoListScreen} />
+        <Stack.Screen
+          name="Memolist"
+          component={MemoListScreen}
+          options={{
+            headerRight: () => (
+              <TouchableOpacity
+                onPress={() => alert('This is a button!')}
+              >
+                <Image
+                  style={{ width: 40, height: 40 }}
+                  resizeMode="contain"
+                  // eslint-disable-next-line global-require
+                  source={require('./assets/settingicon.png')}
+                />
+              </TouchableOpacity>
+            ),
+          }}
+        />
         <Stack.Screen name="MemoSignin" component={MemoToppage} />
         <Stack.Screen name="ResetAllData" component={ResetAllData} />
       </Stack.Navigator>
