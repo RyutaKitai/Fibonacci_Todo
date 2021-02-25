@@ -109,9 +109,7 @@ export default function CheckBox(props) {
   };
 
   useLayoutEffect(() => {
-    setisChecked(iscahcke);
     selectTable();
-    console.log(currentTableState);
   }, []);
 
   return (

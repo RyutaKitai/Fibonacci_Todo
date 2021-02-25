@@ -61,7 +61,6 @@ export default function MemoListScreen() {
   }
 
   useLayoutEffect(() => {
-    setState([1, 0, 0]);
     // console.log(usedTable);
   }, []);
 

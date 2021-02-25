@@ -6,7 +6,7 @@ import * as SQLite from 'expo-sqlite';
 import * as FileSystem from 'expo-file-system';
 import { TextInput } from 'react-native-gesture-handler';
 
-export default function DBexamplePage() {
+export default function ResetAllData() {
   const [items, setItems] = useState([]);
   const [lenTable, setLenTable] = useState(0);
 

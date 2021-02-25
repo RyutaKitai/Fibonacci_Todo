@@ -21,8 +21,6 @@ class MemoToppage extends React.Component {
         <Button onPress={() => { this.props.navigation.navigate('Memolist'); }}>
           メモする
         </Button>
-        {/* <Text>{console.log(data)}</Text>
-        <Text>{data}</Text> */}
       </View>
     );
   }

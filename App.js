@@ -7,7 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import MemoListScreen from './src/screens/MemoListScreen';
 import MemoToppage from './src/screens/MemoToppage';
-import DBexamplePage from './src/screens/DBexamplePage';
+import ResetAllData from './src/screens/ResetAllData';
 
 const Stack = createStackNavigator();
 
@@ -140,7 +140,7 @@ export default function App() {
       >
         <Stack.Screen name="Memolist" component={MemoListScreen} />
         <Stack.Screen name="MemoSignin" component={MemoToppage} />
-        <Stack.Screen name="DBexamplePage" component={DBexamplePage} />
+        <Stack.Screen name="ResetAllData" component={ResetAllData} />
       </Stack.Navigator>
     </NavigationContainer>
   );

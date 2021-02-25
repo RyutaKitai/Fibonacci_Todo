@@ -108,7 +108,6 @@ export default function Dropdown(props) {
   };
 
   useLayoutEffect(() => {
-    clickState(false);
     selectTable();
   }, []);
 
