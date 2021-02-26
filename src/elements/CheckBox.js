@@ -24,20 +24,20 @@ export default function CheckBox(props) {
               temp.push(resultSet.rows.item(i));
             }
             setCurrentTableState(temp);
-            console.log(resultSet);
-            console.log('success_selectTable');
+            // console.log(resultSet);
+            // console.log('success_selectTable');
           },
           () => {
-            console.log('fail');
+            // console.log('fail');
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
         );
       },
       () => {
-        console.log('fail');
+        // console.log('fail');
       }, // 失敗時のコールバック関数
       () => {
-        console.log('success');
+        // console.log('success');
       }, // 成功時のコールバック関数
     );
   };
@@ -49,7 +49,7 @@ export default function CheckBox(props) {
     } else {
       newIsChecked = 0;
     }
-    console.log(currentTableState[0].useTodoLong);
+    // console.log(currentTableState[0].useTodoLong);
     db.transaction(
       (tx) => {
         if (currentTableState[0].useTodoNow === 1) {
@@ -58,12 +58,12 @@ export default function CheckBox(props) {
             [newIsChecked, hereid],
             () => {
               // SUCCESS
-              console.log(newIsChecked);
+              // console.log(newIsChecked);
               setisChecked(newIsChecked);
-              console.log('success_update');
+              // console.log('success_update');
             },
             () => {
-              console.log('fail_update');
+              // console.log('fail_update');
               return true; // ロールバックする場合はtrueを返す
             }, // 失敗時のコールバック関数
           );
@@ -73,12 +73,12 @@ export default function CheckBox(props) {
             [newIsChecked, hereid],
             () => {
               // SUCCESS
-              console.log(newIsChecked);
+              // console.log(newIsChecked);
               setisChecked(newIsChecked);
-              console.log('success_update');
+              // console.log('success_update');
             },
             () => {
-              console.log('fail_update');
+              // console.log('fail_update');
               return true; // ロールバックする場合はtrueを返す
             }, // 失敗時のコールバック関数
           );
@@ -88,22 +88,22 @@ export default function CheckBox(props) {
             [newIsChecked, hereid],
             () => {
               // SUCCESS
-              console.log(newIsChecked);
+              // console.log(newIsChecked);
               setisChecked(newIsChecked);
-              console.log('success_update');
+              // console.log('success_update');
             },
             () => {
-              console.log('fail_update');
+              // console.log('fail_update');
               return true; // ロールバックする場合はtrueを返す
             }, // 失敗時のコールバック関数
           );
         }
       },
       () => {
-        console.log('fail');
+        // console.log('fail');
       }, // 失敗時のコールバック関数
       () => {
-        console.log('success');
+        // console.log('success');
       }, // 成功時のコールバック関数
     );
   };

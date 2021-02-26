@@ -26,20 +26,20 @@ export default function Dropdown(props) {
               temp.push(resultSet.rows.item(i));
             }
             setCurrentTableState(temp);
-            console.log(resultSet);
-            console.log('success_selectTable');
+            // console.log(resultSet);
+            // console.log('success_selectTable');
           },
           () => {
-            console.log('fail');
+            // console.log('fail');
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
         );
       },
       () => {
-        console.log('fail');
+        // console.log('fail');
       }, // 失敗時のコールバック関数
       () => {
-        console.log('success');
+        // console.log('success');
       }, // 成功時のコールバック関数
     );
   };
@@ -59,10 +59,10 @@ export default function Dropdown(props) {
               // SUCCESS
               clickState(false);
               setNumber(number);
-              console.log('success_update');
+              // console.log('success_update');
             },
             () => {
-              console.log('fail_update');
+              // console.log('fail_update');
               return true; // ロールバックする場合はtrueを返す
             }, // 失敗時のコールバック関数
           );
@@ -74,7 +74,7 @@ export default function Dropdown(props) {
               // SUCCESS
               clickState(false);
               setNumber(number);
-              console.log('success_update');
+              // console.log('success_update');
             },
             () => {
               console.log('fail_update');

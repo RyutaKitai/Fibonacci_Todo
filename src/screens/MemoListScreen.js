@@ -23,20 +23,20 @@ export default function MemoListScreen() {
             // SUCCESS
             // clickState(false);
             // setNumber(number);
-            setState([pState[0], pState[1], pState[2]])
-            console.log('success_updatetext');
+            setState([pState[0], pState[1], pState[2]]);
+            // console.log('success_updatetext');
           },
           () => {
-            console.log('fail_updatetext');
+            // console.log('fail_updatetext');
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
         );
       },
       () => {
-        console.log('fail');
+        // console.log('fail');
       }, // 失敗時のコールバック関数
       () => {
-        console.log('success');
+        // console.log('success');
       }, // 成功時のコールバック関数
     );
   };

@@ -24,19 +24,19 @@ export default function ResetAllData() {
             }
             setItems(temp);
             setLenTable(resultSet.rows.length);
-            console.log('success_selectAll');
+            // console.log('success_selectAll');
           },
           () => {
-            console.log('fail');
+            // console.log('fail');
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
         );
       },
       () => {
-        console.log('fail');
+        // console.log('fail');
       }, // 失敗時のコールバック関数
       () => {
-        console.log('success');
+        // console.log('success');
       }, // 成功時のコールバック関数
     );
   };
@@ -49,10 +49,10 @@ export default function ResetAllData() {
           'TRUNCATE table todoNow;',
           null,
           () => {
-            console.log('success');
+            // console.log('success');
           }, // 成功時のコールバック関数
           () => {
-            console.log('fail');
+            // console.log('fail');
 
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
@@ -61,10 +61,10 @@ export default function ResetAllData() {
           'TRUNCATE table todoMid;',
           null,
           () => {
-            console.log('success');
+            // console.log('success');
           }, // 成功時のコールバック関数
           () => {
-            console.log('fail');
+            // console.log('fail');
 
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
@@ -73,20 +73,20 @@ export default function ResetAllData() {
           'TRUNCATE table todoLong;',
           null,
           () => {
-            console.log('success');
+            // console.log('success');
           }, // 成功時のコールバック関数
           () => {
-            console.log('fail');
+            // console.log('fail');
 
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
         );
       },
       () => {
-        console.log('fail');
+        // console.log('fail');
       }, // 失敗時のコールバック関数
       () => {
-        console.log('success_del');
+        // console.log('success_del');
       }, // 成功時のコールバック関数
     );
   };
@@ -99,10 +99,10 @@ export default function ResetAllData() {
           'drop table todoNow;',
           null,
           () => {
-            console.log('success');
+            // console.log('success');
           }, // 成功時のコールバック関数
           () => {
-            console.log('fail');
+            // console.log('fail');
 
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
@@ -111,10 +111,10 @@ export default function ResetAllData() {
           'drop table todoMid;',
           null,
           () => {
-            console.log('success');
+            // console.log('success');
           }, // 成功時のコールバック関数
           () => {
-            console.log('fail');
+            // console.log('fail');
 
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
@@ -123,10 +123,10 @@ export default function ResetAllData() {
           'drop table todoLong;',
           null,
           () => {
-            console.log('success');
+            // console.log('success');
           }, // 成功時のコールバック関数
           () => {
-            console.log('fail');
+            // console.log('fail');
 
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
@@ -135,20 +135,20 @@ export default function ResetAllData() {
           'drop table useTable;',
           null,
           () => {
-            console.log('success');
+            // console.log('success');
           }, // 成功時のコールバック関数
           () => {
-            console.log('fail');
+            // console.log('fail');
 
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
         );
       },
       () => {
-        console.log('fail');
+        // console.log('fail');
       }, // 失敗時のコールバック関数
       () => {
-        console.log('success_del');
+        // console.log('success_del');
       }, // 成功時のコールバック関数
     );
   };

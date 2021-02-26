@@ -39,7 +39,7 @@ export default function MemoList1() {
             setItems(temp);
             setLenTable(resultSet.rows.length);
             // console.log(temp);
-            console.log('success_selectAll');
+            // console.log('success_selectAll');
           },
           () => {
             // console.log('fail');
@@ -48,10 +48,10 @@ export default function MemoList1() {
         );
       },
       () => {
-        console.log('fail');
+        // console.log('fail');
       }, // 失敗時のコールバック関数
       () => {
-        console.log('success');
+        // console.log('success');
       }, // 成功時のコールバック関数
     );
   };
@@ -75,10 +75,10 @@ export default function MemoList1() {
         );
       },
       () => {
-        console.log('fail');
+        // console.log('fail');
       }, // 失敗時のコールバック関数
       () => {
-        console.log('success');
+        // console.log('success');
       }, // 成功時のコールバック関数
     );
   };
@@ -101,10 +101,10 @@ export default function MemoList1() {
         );
       },
       () => {
-        console.log('fail all');
+        // console.log('fail all');
       }, // 失敗時のコールバック関数
       () => {
-        console.log('success');
+        // console.log('success');
       }, // 成功時のコールバック関数
     );
   };
@@ -117,7 +117,7 @@ export default function MemoList1() {
           'delete from todoMid where isChacked=?;',
           [1],
           () => {
-            console.log('success_deleteAll');
+            // console.log('success_deleteAll');
           }, // 成功時のコールバック関数
           () => {
             // console.log('fail_delete');
@@ -127,10 +127,10 @@ export default function MemoList1() {
         );
       },
       () => {
-        console.log('fail all');
+        // console.log('fail all');
       }, // 失敗時のコールバック関数
       () => {
-        console.log('success');
+        // console.log('success');
       }, // 成功時のコールバック関数
     );
   };
@@ -149,7 +149,7 @@ export default function MemoList1() {
             setItems(temp);
             setLenTable(resultSet.rows.length);
             // console.log(temp);
-            console.log('success_sortdown');
+            // console.log('success_sortdown');
           },
           () => {
             // console.log('fail');
@@ -158,10 +158,10 @@ export default function MemoList1() {
         );
       },
       () => {
-        console.log('fail');
+        // console.log('fail');
       }, // 失敗時のコールバック関数
       () => {
-        console.log('success');
+        // console.log('success');
       }, // 成功時のコールバック関数
     );
   };
@@ -181,7 +181,7 @@ export default function MemoList1() {
             setItems(temp);
             setLenTable(resultSet.rows.length);
             // console.log(temp);
-            console.log('success_sortdown');
+            // console.log('success_sortdown');
           },
           () => {
             // console.log('fail');
@@ -190,10 +190,10 @@ export default function MemoList1() {
         );
       },
       () => {
-        console.log('fail');
+        // console.log('fail');
       }, // 失敗時のコールバック関数
       () => {
-        console.log('success');
+        // console.log('success');
       }, // 成功時のコールバック関数
     );
   };

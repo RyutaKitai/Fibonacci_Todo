@@ -14,7 +14,6 @@ const Stack = createStackNavigator();
 
 export default function App() {
   const db = SQLite.openDatabase('DB.db');
-
   const initializeDatabase = () => {
     // DBの作成先を出力
     console.log(FileSystem.documentDirectory + 'SQLite/');
@@ -24,10 +23,10 @@ export default function App() {
           'create table if not exists useTable (id integer primary key not null, useTodoNow BIT, useTodoMid BIT, useTodoLong BIT);',
           null,
           () => {
-            console.log('success_create_usetable');
+            // console.log('success_create_usetable');
           },
           () => {
-            console.log('fail_create_usetable');
+            // console.log('fail_create_usetable');
 
             return true;
           },
@@ -36,10 +35,10 @@ export default function App() {
           'create table if not exists todoNow (id integer primary key not null, order_id integer, isChacked BIT, bodyText text, number integer);',
           null,
           () => {
-            console.log('success_create1');
+            // console.log('success_create1');
           },
           () => {
-            console.log('fail_create1');
+            // console.log('fail_create1');
 
             return true;
           },
@@ -48,10 +47,10 @@ export default function App() {
           'create table if not exists todoMid (id integer primary key not null, order_id integer, isChacked BIT, bodyText text, number integer);',
           null,
           () => {
-            console.log('success_create2');
+            // console.log('success_create2');
           },
           () => {
-            console.log('fail_create2');
+            // console.log('fail_create2');
 
             return true;
           },
@@ -60,10 +59,10 @@ export default function App() {
           'create table if not exists todoLong (id integer primary key not null, order_id integer, isChacked BIT, bodyText text, number integer);',
           null,
           () => {
-            console.log('success_create3');
+            // console.log('success_create3');
           },
           () => {
-            console.log('fail_create3');
+            // console.log('fail_create3');
 
             return true;
           },
@@ -72,10 +71,10 @@ export default function App() {
           'insert into useTable (id, useTodoNow, useTodoMid, useTodoLong) values (?, ?, ?, ?)',
           [1, 1, 0, 0],
           () => {
-            console.log('success_insert_usetable');
+            // console.log('success_insert_usetable');
           }, // 成功時のコールバック関数
           () => {
-            console.log('fail_insert_usetable');
+            // console.log('fail_insert_usetable');
 
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
@@ -84,10 +83,10 @@ export default function App() {
           'insert into todoNow (id, order_id, isChacked, bodyText, number) values (?, ?, ?, ?, ?)',
           [1, 1, 0, 'Todo', 0],
           () => {
-            console.log('success_insert1');
+            // console.log('success_insert1');
           }, // 成功時のコールバック関数
           () => {
-            console.log('fail_insert1');
+            // console.log('fail_insert1');
 
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
@@ -96,10 +95,10 @@ export default function App() {
           'insert into todoMid (id, order_id, isChacked, bodyText, number) values (?, ?, ?, ?, ?);',
           [1, 1, 0, 'Todo', 0],
           () => {
-            console.log('success_insert2');
+            // console.log('success_insert2');
           }, // 成功時のコールバック関数
           () => {
-            console.log('fail_insert2');
+            // console.log('fail_insert2');
 
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
@@ -108,10 +107,10 @@ export default function App() {
           'insert into todoLong (id, order_id, isChacked, bodyText, number) values (?, ?, ?, ?, ?);',
           [1, 1, 0, 'Todo', 0],
           () => {
-            console.log('success_insert3');
+            // console.log('success_insert3');
           }, // 成功時のコールバック関数
           () => {
-            console.log('fail_insert3');
+            // console.log('fail_insert3');
 
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
