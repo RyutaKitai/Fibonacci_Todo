@@ -46,7 +46,7 @@ export default function ResetAllData() {
     db.transaction(
       (tx) => {
         tx.executeSql(
-          'TRUNCATE table todoNow;',
+          'Drop table todoNow;',
           null,
           () => {
             // console.log('success');
@@ -58,7 +58,7 @@ export default function ResetAllData() {
           }, // 失敗時のコールバック関数
         );
         tx.executeSql(
-          'TRUNCATE table todoMid;',
+          'Drop table todoMid;',
           null,
           () => {
             // console.log('success');
@@ -70,7 +70,7 @@ export default function ResetAllData() {
           }, // 失敗時のコールバック関数
         );
         tx.executeSql(
-          'TRUNCATE table todoLong;',
+          'Drop table todoLong;',
           null,
           () => {
             // console.log('success');
@@ -80,6 +80,42 @@ export default function ResetAllData() {
 
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
+        );
+        tx.executeSql(
+          'create table if not exists todoNow (id integer primary key not null, order_id integer, isChacked BIT, bodyText text, number integer);',
+          null,
+          () => {
+            // console.log('success_create1');
+          },
+          () => {
+            // console.log('fail_create1');
+
+            return true;
+          },
+        );
+        tx.executeSql(
+          'create table if not exists todoMid (id integer primary key not null, order_id integer, isChacked BIT, bodyText text, number integer);',
+          null,
+          () => {
+            // console.log('success_create2');
+          },
+          () => {
+            // console.log('fail_create2');
+
+            return true;
+          },
+        );
+        tx.executeSql(
+          'create table if not exists todoLong (id integer primary key not null, order_id integer, isChacked BIT, bodyText text, number integer);',
+          null,
+          () => {
+            // console.log('success_create3');
+          },
+          () => {
+            // console.log('fail_create3');
+
+            return true;
+          },
         );
       },
       () => {
@@ -159,7 +195,7 @@ export default function ResetAllData() {
 
   return (
     <View>
-      {/* <Text>{console.log(items)}</Text> */}
+      <Text>{console.log(items)}</Text>
       <Button title="reset all data" onPress={() => { deleteTableData(); }} />
     </View>
   );

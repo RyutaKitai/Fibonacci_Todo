@@ -24,8 +24,6 @@ export default function CheckBox(props) {
               temp.push(resultSet.rows.item(i));
             }
             setCurrentTableState(temp);
-            // console.log(resultSet);
-            // console.log('success_selectTable');
           },
           () => {
             // console.log('fail');

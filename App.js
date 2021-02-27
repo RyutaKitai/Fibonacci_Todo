@@ -4,7 +4,8 @@ import * as SQLite from 'expo-sqlite';
 import * as FileSystem from 'expo-file-system';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
+import { navigationRef } from './route';
+import * as RootNavigation from './route';
 import MemoListScreen from './src/screens/MemoListScreen';
 import MemoToppage from './src/screens/MemoToppage';
 import ResetAllData from './src/screens/ResetAllData';
@@ -79,42 +80,42 @@ export default function App() {
             return true; // ロールバックする場合はtrueを返す
           }, // 失敗時のコールバック関数
         );
-        tx.executeSql(
-          'insert into todoNow (id, order_id, isChacked, bodyText, number) values (?, ?, ?, ?, ?)',
-          [1, 1, 0, 'Todo', 0],
-          () => {
-            // console.log('success_insert1');
-          }, // 成功時のコールバック関数
-          () => {
-            // console.log('fail_insert1');
+        // tx.executeSql(
+        //   'insert into todoNow (id, order_id, isChacked, bodyText, number) values (?, ?, ?, ?, ?)',
+        //   [1, 1, 0, 'Todo', 0],
+        //   () => {
+        //     // console.log('success_insert1');
+        //   }, // 成功時のコールバック関数
+        //   () => {
+        //     // console.log('fail_insert1');
 
-            return true; // ロールバックする場合はtrueを返す
-          }, // 失敗時のコールバック関数
-        );
-        tx.executeSql(
-          'insert into todoMid (id, order_id, isChacked, bodyText, number) values (?, ?, ?, ?, ?);',
-          [1, 1, 0, 'Todo', 0],
-          () => {
-            // console.log('success_insert2');
-          }, // 成功時のコールバック関数
-          () => {
-            // console.log('fail_insert2');
+        //     return true; // ロールバックする場合はtrueを返す
+        //   }, // 失敗時のコールバック関数
+        // );
+        // tx.executeSql(
+        //   'insert into todoMid (id, order_id, isChacked, bodyText, number) values (?, ?, ?, ?, ?);',
+        //   [1, 1, 0, 'Todo', 0],
+        //   () => {
+        //     // console.log('success_insert2');
+        //   }, // 成功時のコールバック関数
+        //   () => {
+        //     // console.log('fail_insert2');
 
-            return true; // ロールバックする場合はtrueを返す
-          }, // 失敗時のコールバック関数
-        );
-        tx.executeSql(
-          'insert into todoLong (id, order_id, isChacked, bodyText, number) values (?, ?, ?, ?, ?);',
-          [1, 1, 0, 'Todo', 0],
-          () => {
-            // console.log('success_insert3');
-          }, // 成功時のコールバック関数
-          () => {
-            // console.log('fail_insert3');
+        //     return true; // ロールバックする場合はtrueを返す
+        //   }, // 失敗時のコールバック関数
+        // );
+        // tx.executeSql(
+        //   'insert into todoLong (id, order_id, isChacked, bodyText, number) values (?, ?, ?, ?, ?);',
+        //   [1, 1, 0, 'Todo', 0],
+        //   () => {
+        //     // console.log('success_insert3');
+        //   }, // 成功時のコールバック関数
+        //   () => {
+        //     // console.log('fail_insert3');
 
-            return true; // ロールバックする場合はtrueを返す
-          }, // 失敗時のコールバック関数
-        );
+        //     return true; // ロールバックする場合はtrueを返す
+        //   }, // 失敗時のコールバック関数
+        // );
       },
       () => {
         console.log('fail initialize tables');
@@ -129,7 +130,7 @@ export default function App() {
   }, []);
 
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator
         initialRouteName="MemoSignin"
         screenOptions={{
@@ -144,7 +145,7 @@ export default function App() {
           options={{
             headerRight: () => (
               <TouchableOpacity
-                onPress={() => alert('This is a button!')}
+                onPress={() => RootNavigation.navigate('ResetAllData')}
               >
                 <Image
                   style={{ width: 40, height: 40 }}
