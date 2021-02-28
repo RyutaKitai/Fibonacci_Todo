@@ -9,6 +9,7 @@ import * as RootNavigation from './route';
 import MemoListScreen from './src/screens/MemoListScreen';
 import MemoToppage from './src/screens/MemoToppage';
 import ResetAllData from './src/screens/ResetAllData';
+import PrivacyPolicy from './src/screens/PrivacyPolicy';
 
 const Stack = createStackNavigator();
 
@@ -116,6 +117,7 @@ export default function App() {
         />
         <Stack.Screen name="MemoSignin" component={MemoToppage} />
         <Stack.Screen name="ResetAllData" component={ResetAllData} />
+        <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
       </Stack.Navigator>
     </NavigationContainer>
   );

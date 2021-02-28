@@ -221,7 +221,7 @@ export default function MemoList2() {
       <FlatList
         data={items}
         renderItem={({ item }) => <Item text={item.bodyText} isChecked={item.isChacked} id={item.id} num1={item.number} />}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
       />
       {isPressedAdd ? (
         <View style={styles.newinput}>

@@ -56,7 +56,6 @@ export default function MemoList1() {
           'update todoMid set bodyText=? where id=?;',
           [newText, hereid],
           () => {
-
             console.log('success_updatetext');
           },
           () => {
@@ -112,7 +111,6 @@ export default function MemoList1() {
           },
           () => {
             // console.log('fail_delete');
-
             return true;
           },
         );
@@ -171,7 +169,6 @@ export default function MemoList1() {
             }
             setItems(temp);
             setLenTable(resultSet.rows.length);
-
           },
           () => {
             // console.log('fail');
@@ -225,7 +222,7 @@ export default function MemoList1() {
       <FlatList
         data={items}
         renderItem={({ item }) => <Item text={item.bodyText} isChecked={item.isChacked} id={item.id} num1={item.number} />}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
       />
       {isPressedAdd ? (
         <View style={styles.newinput}>

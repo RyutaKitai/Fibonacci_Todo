@@ -3,6 +3,7 @@ import {
   Text, Button, View,
 } from 'react-native';
 import * as SQLite from 'expo-sqlite';
+import * as RootNavigation from '../../route';
 
 export default function ResetAllData() {
   const [items, setItems] = useState([]);
@@ -183,6 +184,7 @@ export default function ResetAllData() {
     <View>
       {/* <Text>{console.log(items)}</Text> */}
       <Button title="reset all data" onPress={() => { deleteTableData(); }} />
+      <Button title="Privacy Policy" onPress={() => RootNavigation.navigate('PrivacyPolicy')} />
     </View>
   );
 }
