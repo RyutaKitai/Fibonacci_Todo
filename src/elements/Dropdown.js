@@ -82,7 +82,7 @@ export default function Dropdown(props) {
             <ScrollView style={styles.numbers}>
               {numlist.map((num) => (
                 <TouchableOpacity onPress={() => updateData(id, num)} key={num} style={styles.textTouch}>
-                  <Text style={styles.text}>{num}</Text>
+                  <Text style={textStyle(numlist, colors, num)}>{num}</Text>
                 </TouchableOpacity>
               ))}
             </ScrollView>
@@ -97,6 +97,13 @@ export default function Dropdown(props) {
 }
 
 const jewelStyle = (numlist, colors, currentNum) => {
+  const indexOfNum = numlist.indexOf(currentNum);
+  return {
+    color: colors[indexOfNum],
+    fontSize: 34,
+  };
+};
+const textStyle = (numlist, colors, currentNum) => {
   const indexOfNum = numlist.indexOf(currentNum);
   return {
     color: colors[indexOfNum],
@@ -115,9 +122,6 @@ const styles = StyleSheet.create({
     height: 120,
   },
   checkBox: {
-    borderWidth: 1.0,
-    borderColor: '#00CED1',
     paddingHorizontal: 10,
-    borderRadius: 20,
   },
 });
