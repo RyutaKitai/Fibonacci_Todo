@@ -6,11 +6,12 @@ import * as SQLite from 'expo-sqlite';
 
 export default function Dropdown(props) {
   const db = SQLite.openDatabase('DB.db');
-  const { id, num1, usedTable } = props;
+  const {
+    id, num1, usedTable, numlist, colors,
+  } = props;
 
   const [isChecked, clickState] = useState(false);
   const [currentNum, setNumber] = useState(num1);
-  const numlist = [1, 2, 3, 5, 8];
   const [currentTableState, setCurrentTableState] = useState(usedTable);
 
   const handlePopup = () => {
@@ -65,6 +66,7 @@ export default function Dropdown(props) {
       },
     );
   };
+  // colors = { [0, 255, 255, 0.1, 0.2, 0.3, 0.5, 0.8]}
 
   return (
     <View style={styles.pulldown}>
@@ -72,7 +74,7 @@ export default function Dropdown(props) {
         style={styles.checkBox}
         onPress={() => handlePopup()}
       >
-        <Text style={styles.title}>
+        <Text style={jewelStyle(numlist, colors, currentNum)}>
           {currentNum}
         </Text>
         {isChecked ? (
@@ -94,10 +96,15 @@ export default function Dropdown(props) {
   );
 }
 
-const styles = StyleSheet.create({
-  title: {
+const jewelStyle = (numlist, colors, currentNum) => {
+  const indexOfNum = numlist.indexOf(currentNum);
+  return {
+    color: colors[indexOfNum],
     fontSize: 28,
-  },
+  };
+};
+
+const styles = StyleSheet.create({
   textTouch: {
     borderTopWidth: 1,
   },

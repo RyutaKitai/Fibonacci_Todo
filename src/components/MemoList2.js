@@ -205,7 +205,7 @@ export default function MemoList2() {
         >
           {text}
         </TextInput>
-        <Dropdown id={id} num1={num1} usedTable={[0, 0, 1]} />
+        <Dropdown id={id} num1={num1} usedTable={[0, 0, 1]} numlist={[55, 89, 144]} colors={['#00cccc', '#009999', '#008080']} />
       </View>
     );
   }
