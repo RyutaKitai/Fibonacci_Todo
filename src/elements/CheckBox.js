@@ -11,32 +11,6 @@ export default function CheckBox(props) {
   const [isChecked, setisChecked] = useState(iscahcke);
   const [currentTableState, setCurrentTableState] = useState(usedTable);
 
-  // const selectTable = () => {
-  //   db.transaction(
-  //     (tx) => {
-  //       tx.executeSql(
-  //         'select * from useTable where id=1;',
-  //         null,
-  //         (_, resultSet) => {
-  //           // SUCCESS
-  //           const temp = [];
-  //           for (let i = 0; i < resultSet.rows.length; i++) {
-  //             temp.push(resultSet.rows.item(i));
-  //           }
-  //           setCurrentTableState(temp);
-  //         },
-  //         () => true,
-  //       );
-  //     },
-  //     () => {
-  //       // console.log('fail');
-  //     },
-  //     () => {
-  //       // console.log('success');
-  //     },
-  //   );
-  // };
-
   const updateData = (hereid, ischecked) => {
     let newIsChecked = 0;
     if (ischecked === 0) {
@@ -92,14 +66,6 @@ export default function CheckBox(props) {
       },
     );
   };
-
-  // useLayoutEffect(() => {
-  //   let isCancelled = false;
-  //   selectTable();
-  //   return () => {
-  //     isCancelled = true;
-  //   };
-  // }, []);
 
   return (
     <View>

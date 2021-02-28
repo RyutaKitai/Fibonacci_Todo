@@ -11,14 +11,10 @@ import CheckBox from '../elements/CheckBox';
 import CircleButton from '../elements/CircleButton';
 
 export default function MemoList() {
-  // const [id, setID] = useState(1);
-  // const { currentTable } = props;
   const [isPressedAdd, setAddPressed] = useState(false);
   // const [usedTable, setUsedTable] = useState(currentTable);
 
-  // ***
-  // Database from here
-  // ***
+  // *** Database from here ***
   const [items, setItems] = useState([]);
   const [lenTable, setLenTable] = useState(0);
 
@@ -38,21 +34,20 @@ export default function MemoList() {
             }
             setItems(temp);
             setLenTable(resultSet.rows.length);
-            // console.log(temp);
             // console.log('success_selectAll');
           },
           () => {
-            // console.log('fail');
-            return true; // ロールバックする場合はtrueを返す
-          }, // 失敗時のコールバック関数
+            // consoe.log('fail');
+            return true;
+          },
         );
       },
       () => {
         // console.log('fail');
-      }, // 失敗時のコールバック関数
+      },
       () => {
         // console.log('success');
-      }, // 成功時のコールバック関数
+      },
     );
   };
 
@@ -63,23 +58,20 @@ export default function MemoList() {
           'update todoNow set bodyText=? where id=?;',
           [newText, hereid],
           () => {
-            // SUCCESS
-            // clickState(false);
-            // setNumber(number);
-            // console.log('success_updatetext');
+            console.log('success_updatetext');
           },
           () => {
             // console.log('fail_updatetext');
-            return true; // ロールバックする場合はtrueを返す
-          }, // 失敗時のコールバック関数
+            return true;
+          },
         );
       },
       () => {
         // console.log('fail');
-      }, // 失敗時のコールバック関数
+      },
       () => {
         // console.log('success');
-      }, // 成功時のコールバック関数
+      },
     );
   };
 
@@ -92,20 +84,20 @@ export default function MemoList() {
           [newid, 0, newtext, 0],
           () => {
             // console.log('success_insert');
-          }, // 成功時のコールバック関数
+          },
           () => {
             // console.log('fail_insert');
 
-            return true; // ロールバックする場合はtrueを返す
-          }, // 失敗時のコールバック関数
+            return true;
+          },
         );
       },
       () => {
         // console.log('fail all');
-      }, // 失敗時のコールバック関数
+      },
       () => {
         // console.log('success');
-      }, // 成功時のコールバック関数
+      }
     );
   };
 
@@ -118,20 +110,19 @@ export default function MemoList() {
           [1],
           () => {
             // console.log('success_deleteAll');
-          }, // 成功時のコールバック関数
+          },
           () => {
             // console.log('fail_delete');
-
-            return true; // ロールバックする場合はtrueを返す
-          }, // 失敗時のコールバック関数
+            return true;
+          },
         );
       },
       () => {
         // console.log('fail all');
-      }, // 失敗時のコールバック関数
+      },
       () => {
         // console.log('success');
-      }, // 成功時のコールバック関数
+      },
     );
   };
   const sortDataUp = () => {
@@ -153,16 +144,16 @@ export default function MemoList() {
           },
           () => {
             // console.log('fail');
-            return true; // ロールバックする場合はtrueを返す
-          }, // 失敗時のコールバック関数
+            return true;
+          },
         );
       },
       () => {
         // console.log('fail');
-      }, // 失敗時のコールバック関数
+      },
       () => {
         // console.log('success');
-      }, // 成功時のコールバック関数
+      },
     );
   };
 
@@ -180,21 +171,21 @@ export default function MemoList() {
             }
             setItems(temp);
             setLenTable(resultSet.rows.length);
-            // console.log(temp);
+
             // console.log('success_sortdown');
           },
           () => {
             // console.log('fail');
-            return true; // ロールバックする場合はtrueを返す
-          }, // 失敗時のコールバック関数
+            return true;
+          },
         );
       },
       () => {
         // console.log('fail');
-      }, // 失敗時のコールバック関数
+      },
       () => {
         // console.log('success');
-      }, // 成功時のコールバック関数
+      },
     );
   };
 
