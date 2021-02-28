@@ -60,10 +60,6 @@ export default function MemoListScreen() {
     }
   }
 
-  useLayoutEffect(() => {
-    // console.log(usedTable);
-  }, []);
-
   return (
     <View style={styles.container}>
       <View style={styles.tabcontainer}>
@@ -77,9 +73,11 @@ export default function MemoListScreen() {
           <Text style={styles.tabtext}>長期</Text>
         </TouchableOpacity>
       </View>
-      {state[0] === 1 ? <MemoList /> : null}
-      {state[1] === 1 ? <MemoList1 /> : null}
-      {state[2] === 1 ? <MemoList2 /> : null}
+      <View style={styles.memoList}>
+        {state[0] === 1 ? <MemoList /> : null}
+        {state[1] === 1 ? <MemoList1 /> : null}
+        {state[2] === 1 ? <MemoList2 /> : null}
+      </View>
     </View>
   );
 }
@@ -92,29 +90,41 @@ const styles = StyleSheet.create({
   tabcontainer: {
     flexDirection: 'row',
     height: 50,
-    borderWidth: 1,
+    borderWidth: 0.2,
     textAlignVertical: 'center',
   },
   tab: {
+    borderRadius: 4,
     marginTop: 8,
     marginHorizontal: 13,
-    borderWidth: 1,
-    // alignSelf: 'stretch',
+    borderWidth: 0.2,
     flex: 1,
     height: 40,
     width: 80,
     alignItems: 'center',
     justifyContent: 'center',
-
   },
   tabtext: {
     fontSize: 18,
   },
   tabpressed: {
+    borderWidth: 1,
     borderColor: '#1E90FF',
     backgroundColor: '#B9DEED',
+    borderRadius: 4,
   },
   tabUnpressed: {
 
+  },
+  memoList: {
+    flex: 1,
+    borderWidth: 0.2,
+    marginHorizontal: 4,
+    marginBottom: 8,
+    marginTop: 2,
+    shadowOffset: { width: 2, height: 2 },
+    shadowColor: 'black',
+    shadowOpacity: 0.2,
+    borderRadius: 4,
   },
 });

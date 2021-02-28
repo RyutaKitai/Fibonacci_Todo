@@ -6,39 +6,36 @@ import * as SQLite from 'expo-sqlite';
 
 export default function CheckBox(props) {
   // const { dispatch } = useContext(MyContext);
-  const { iscahcke, id } = props;
+  const { iscahcke, id, usedTable } = props;
   const db = SQLite.openDatabase('DB.db');
   const [isChecked, setisChecked] = useState(iscahcke);
-  const [currentTableState, setCurrentTableState] = useState([]);
+  const [currentTableState, setCurrentTableState] = useState(usedTable);
 
-  const selectTable = () => {
-    db.transaction(
-      (tx) => {
-        tx.executeSql(
-          'select * from useTable where id=1;',
-          null,
-          (_, resultSet) => {
-            // SUCCESS
-            const temp = [];
-            for (let i = 0; i < resultSet.rows.length; i++) {
-              temp.push(resultSet.rows.item(i));
-            }
-            setCurrentTableState(temp);
-          },
-          () => {
-            // console.log('fail');
-            return true; // ロールバックする場合はtrueを返す
-          }, // 失敗時のコールバック関数
-        );
-      },
-      () => {
-        // console.log('fail');
-      }, // 失敗時のコールバック関数
-      () => {
-        // console.log('success');
-      }, // 成功時のコールバック関数
-    );
-  };
+  // const selectTable = () => {
+  //   db.transaction(
+  //     (tx) => {
+  //       tx.executeSql(
+  //         'select * from useTable where id=1;',
+  //         null,
+  //         (_, resultSet) => {
+  //           // SUCCESS
+  //           const temp = [];
+  //           for (let i = 0; i < resultSet.rows.length; i++) {
+  //             temp.push(resultSet.rows.item(i));
+  //           }
+  //           setCurrentTableState(temp);
+  //         },
+  //         () => true,
+  //       );
+  //     },
+  //     () => {
+  //       // console.log('fail');
+  //     },
+  //     () => {
+  //       // console.log('success');
+  //     },
+  //   );
+  // };
 
   const updateData = (hereid, ischecked) => {
     let newIsChecked = 0;
@@ -47,25 +44,21 @@ export default function CheckBox(props) {
     } else {
       newIsChecked = 0;
     }
-    // console.log(currentTableState[0].useTodoLong);
+    console.log(currentTableState[0]);
     db.transaction(
       (tx) => {
-        if (currentTableState[0].useTodoNow === 1) {
+        if (currentTableState[0] === 1) {
           tx.executeSql(
             'update todoNow set isChacked=? where id=?;',
             [newIsChecked, hereid],
             () => {
-              // SUCCESS
               // console.log(newIsChecked);
               setisChecked(newIsChecked);
               // console.log('success_update');
             },
-            () => {
-              // console.log('fail_update');
-              return true; // ロールバックする場合はtrueを返す
-            }, // 失敗時のコールバック関数
+            () => true,
           );
-        } else if (currentTableState[0].useTodoMid === 1) {
+        } else if (currentTableState[1] === 1) {
           tx.executeSql(
             'update todoMid set isChacked=? where id=?;',
             [newIsChecked, hereid],
@@ -75,10 +68,7 @@ export default function CheckBox(props) {
               setisChecked(newIsChecked);
               // console.log('success_update');
             },
-            () => {
-              // console.log('fail_update');
-              return true; // ロールバックする場合はtrueを返す
-            }, // 失敗時のコールバック関数
+            () => true,
           );
         } else {
           tx.executeSql(
@@ -90,25 +80,26 @@ export default function CheckBox(props) {
               setisChecked(newIsChecked);
               // console.log('success_update');
             },
-            () => {
-              // console.log('fail_update');
-              return true; // ロールバックする場合はtrueを返す
-            }, // 失敗時のコールバック関数
+            () => true,
           );
         }
       },
       () => {
         // console.log('fail');
-      }, // 失敗時のコールバック関数
+      },
       () => {
         // console.log('success');
-      }, // 成功時のコールバック関数
+      },
     );
   };
 
-  useLayoutEffect(() => {
-    selectTable();
-  }, []);
+  // useLayoutEffect(() => {
+  //   let isCancelled = false;
+  //   selectTable();
+  //   return () => {
+  //     isCancelled = true;
+  //   };
+  // }, []);
 
   return (
     <View>

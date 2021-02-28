@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState } from 'react';
 import {
-  Text, Button, View, FlatList,
+  Text, Button, View,
 } from 'react-native';
 import * as SQLite from 'expo-sqlite';
 
@@ -28,16 +28,16 @@ export default function ResetAllData() {
           },
           () => {
             // console.log('fail');
-            return true; // ロールバックする場合はtrueを返す
-          }, // 失敗時のコールバック関数
+            return true;
+          },
         );
       },
       () => {
         // console.log('fail');
-      }, // 失敗時のコールバック関数
+      },
       () => {
         // console.log('success');
-      }, // 成功時のコールバック関数
+      },
     );
   };
 
@@ -50,36 +50,33 @@ export default function ResetAllData() {
           null,
           () => {
             // console.log('success');
-          }, // 成功時のコールバック関数
+          },
           () => {
             // console.log('fail');
-
-            return true; // ロールバックする場合はtrueを返す
-          }, // 失敗時のコールバック関数
+            return true;
+          },
         );
         tx.executeSql(
           'Drop table todoMid;',
           null,
           () => {
             // console.log('success');
-          }, // 成功時のコールバック関数
+          },
           () => {
             // console.log('fail');
-
-            return true; // ロールバックする場合はtrueを返す
-          }, // 失敗時のコールバック関数
+            return true;
+          },
         );
         tx.executeSql(
           'Drop table todoLong;',
           null,
           () => {
             // console.log('success');
-          }, // 成功時のコールバック関数
+          },
           () => {
             // console.log('fail');
-
-            return true; // ロールバックする場合はtrueを返す
-          }, // 失敗時のコールバック関数
+            return true;
+          },
         );
         tx.executeSql(
           'create table if not exists todoNow (id integer primary key not null, order_id integer, isChacked BIT, bodyText text, number integer);',
@@ -89,7 +86,6 @@ export default function ResetAllData() {
           },
           () => {
             // console.log('fail_create1');
-
             return true;
           },
         );
@@ -101,7 +97,6 @@ export default function ResetAllData() {
           },
           () => {
             // console.log('fail_create2');
-
             return true;
           },
         );
@@ -113,17 +108,16 @@ export default function ResetAllData() {
           },
           () => {
             // console.log('fail_create3');
-
             return true;
           },
         );
       },
       () => {
         // console.log('fail');
-      }, // 失敗時のコールバック関数
+      },
       () => {
         // console.log('success_del');
-      }, // 成功時のコールバック関数
+      },
     );
   };
 
@@ -136,24 +130,22 @@ export default function ResetAllData() {
           null,
           () => {
             // console.log('success');
-          }, // 成功時のコールバック関数
+          },
           () => {
             // console.log('fail');
-
-            return true; // ロールバックする場合はtrueを返す
-          }, // 失敗時のコールバック関数
+            return true;
+          },
         );
         tx.executeSql(
           'drop table todoMid;',
           null,
           () => {
             // console.log('success');
-          }, // 成功時のコールバック関数
+          },
           () => {
             // console.log('fail');
-
-            return true; // ロールバックする場合はtrueを返す
-          }, // 失敗時のコールバック関数
+            return true;
+          },
         );
         tx.executeSql(
           'drop table todoLong;',
@@ -163,39 +155,33 @@ export default function ResetAllData() {
           }, // 成功時のコールバック関数
           () => {
             // console.log('fail');
-
-            return true; // ロールバックする場合はtrueを返す
-          }, // 失敗時のコールバック関数
+            return true;
+          },
         );
         tx.executeSql(
           'drop table useTable;',
           null,
           () => {
             // console.log('success');
-          }, // 成功時のコールバック関数
+          },
           () => {
             // console.log('fail');
-
-            return true; // ロールバックする場合はtrueを返す
-          }, // 失敗時のコールバック関数
+            return true;
+          },
         );
       },
       () => {
         // console.log('fail');
-      }, // 失敗時のコールバック関数
+      },
       () => {
         // console.log('success_del');
-      }, // 成功時のコールバック関数
+      },
     );
   };
 
-  // useLayoutEffect(() => {
-  //   showAllData();
-  // }, []);
-
   return (
     <View>
-      <Text>{console.log(items)}</Text>
+      {/* <Text>{console.log(items)}</Text> */}
       <Button title="reset all data" onPress={() => { deleteTableData(); }} />
     </View>
   );

@@ -198,31 +198,6 @@ export default function MemoList2() {
     );
   };
 
-  // const updateOrderID = () => {
-  //   // DBの作成先を出力
-  //   db.transaction(
-  //     (tx) => {
-  //       tx.executeSql(
-  //         'SET @i := 0; UPDATE todoLong SET order_id = (@i := @i +1);',
-  //         null,
-  //         () => {
-  //           console.log('success_updateOrderId');
-  //         }, // 成功時のコールバック関数
-  //         () => {
-  //           console.log('fail_updateOrderId');
-
-  //           return true; // ロールバックする場合はtrueを返す
-  //         }, // 失敗時のコールバック関数
-  //       );
-  //     },
-  //     () => {
-  //       console.log('fail all');
-  //     }, // 失敗時のコールバック関数
-  //     () => {
-  //       console.log('success');
-  //     }, // 成功時のコールバック関数
-  //   );
-  // };
   useLayoutEffect(() => {
     // setUsedTable(currentTable);
     showAllData();
@@ -235,7 +210,7 @@ export default function MemoList2() {
     return (
       <View style={styles.item}>
         {/* <Text>{console.log(JSON.stringify(isChecked))}</Text> */}
-        <CheckBox style={styles.check} iscahcke={isChecked} id={id} />
+        <CheckBox style={styles.check} iscahcke={isChecked} id={id} usedTable={[0, 0, 1]} />
         <TextInput
           style={styles.title}
           multiline={true}
@@ -246,7 +221,7 @@ export default function MemoList2() {
         >
           {text}
         </TextInput>
-        <Dropdown id={id} num1={num1} />
+        <Dropdown id={id} num1={num1} usedTable={[0, 0, 1]} />
       </View>
     );
   }
@@ -348,6 +323,7 @@ const styles = StyleSheet.create({
   sort: {
     flexDirection: 'row',
     alignSelf: 'flex-end',
+    marginTop: 10,
     paddingRight: 20,
   },
   tabcontainer: {

@@ -199,9 +199,11 @@ export default function MemoList() {
   };
 
   useLayoutEffect(() => {
-    // setUsedTable(currentTable);
+    let isCancelled = false;
     showAllData();
-    // console.log(usedTable);
+    return () => {
+      isCancelled = true;
+    };
   }, []);
 
   function Item({
@@ -210,7 +212,7 @@ export default function MemoList() {
     return (
       <View style={styles.item}>
         {/* <Text>{console.log(JSON.stringify(isChecked))}</Text> */}
-        <CheckBox style={styles.check} iscahcke={isChecked} id={id} />
+        <CheckBox style={styles.check} iscahcke={isChecked} id={id} usedTable={[1, 0, 0]} />
         <TextInput
           style={styles.title}
           multiline={true}
@@ -221,7 +223,7 @@ export default function MemoList() {
         >
           {text}
         </TextInput>
-        <Dropdown id={id} num1={num1} />
+        <Dropdown id={id} num1={num1} usedTable={[1, 0, 0]} />
       </View>
     );
   }
@@ -235,9 +237,10 @@ export default function MemoList() {
         <TouchableOpacity onPress={() => sortDataDown()}><Image style={{ width: 30, height: 30 }} resizeMode="contain" source={require('../../assets/down.png')} /></TouchableOpacity>
       </View>
       <FlatList
+        style={styles.flatlist}
         data={items}
         renderItem={({ item }) => <Item text={item.bodyText} isChecked={item.isChacked} id={item.id} num1={item.number} />}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
       />
       {isPressedAdd ? (
         <View style={styles.newinput}>
@@ -323,6 +326,7 @@ const styles = StyleSheet.create({
   sort: {
     flexDirection: 'row',
     alignSelf: 'flex-end',
+    marginTop: 10,
     paddingRight: 20,
   },
   tabcontainer: {
@@ -341,7 +345,6 @@ const styles = StyleSheet.create({
     width: 80,
     alignItems: 'center',
     justifyContent: 'center',
-
   },
   tabtext: {
     fontSize: 18,
